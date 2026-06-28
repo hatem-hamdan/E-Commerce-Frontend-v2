@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useCart } from "./CartContext";
 
+import "./Compontes-css/ProductCard.css";
+
 function Products() {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
@@ -10,7 +12,7 @@ function Products() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/GetProducts",
+          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetProducts",
         );
         setProducts(response.data);
       } catch (error) {
@@ -21,6 +23,7 @@ function Products() {
     fetchProducts();
   }, []);
 
+  console.log(products);
   return (
     <>
       <section className="products py-5">
@@ -30,7 +33,7 @@ function Products() {
               <div className="col-md-4" key={product.productId}>
                 <div className="card shadow-sm h-100">
                   <img
-                    src="https://picsum.photos/400/300?1"
+                    src={product.productImage}
                     className="card-img-top"
                     alt={product.productName}
                   />

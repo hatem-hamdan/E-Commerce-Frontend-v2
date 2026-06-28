@@ -39,7 +39,7 @@ export function Login({
     };
 
     try {
-      const response = await fetch("https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/Login", {
+      const response = await fetch("https://storebackend-2-wbm1.onrender.com/api/MyStore/Login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export function Login({
       if (response.ok) {
         // 🟢 جلب بيانات المستخدم الحالي
         const currentUser = await axios.get(
-          "https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/GetCurrentUser",
+          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },

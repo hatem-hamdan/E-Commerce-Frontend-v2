@@ -11,7 +11,7 @@ export function MyOrders() {
         // استخراج التوكن المخزن عند تسجيل الدخول
 
         const response = await fetch(
-          "https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/GetMyOrders",
+          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetMyOrders",
           {
             method: "GET",
             credentials: "include",

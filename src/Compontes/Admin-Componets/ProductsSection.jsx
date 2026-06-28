@@ -9,7 +9,7 @@ export function ProductsSection() {
     const getProducts = async () => {
       try {
         const response = await fetch(
-          "https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/GetProducts",
+          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetProducts",
           {
             method: "GET",
             credentials: "include",

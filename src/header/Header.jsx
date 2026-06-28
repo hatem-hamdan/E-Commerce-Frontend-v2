@@ -21,7 +21,7 @@ export function Header() {
     const getCurrentUser = async () => {
       try {
         const response = await axios.get(
-          "https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/GetCurrentUser",
+          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },
@@ -108,7 +108,6 @@ export function Header() {
           }}
         />
       )}
-      ```
       {/* Register */}
       {showRegister && (
         <Register

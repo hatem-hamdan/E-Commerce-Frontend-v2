@@ -7,7 +7,7 @@ export function OrdersSection() {
     const getOrders = async () => {
       try {
         const response = await fetch(
-          "https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/GetAllOrders",
+          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetAllOrders",
           {
             method: "GET",
             credentials: "include",

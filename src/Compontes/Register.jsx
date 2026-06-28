@@ -18,7 +18,7 @@ export function Register({ onClose, onSwitchToLogin }) {
 
     try {
       const response = await fetch(
-        "https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/Users",
+        "https://storebackend-2-wbm1.onrender.com/api/MyStore/Users",
         {
           method: "POST",
           headers: {

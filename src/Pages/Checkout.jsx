@@ -61,7 +61,7 @@ export function Checkout() {
     try {
       // 2. إرسال الطلب مع تمرير الـ Authorization Header
       const response = await fetch(
-        "https://hatemhamdan-001-site1.jtempurl.com/api/MyStore/CreateOrder",
+        "https://storebackend-2-wbm1.onrender.com/api/MyStore/CreateOrder",
         {
           method: "POST",
           headers: {
