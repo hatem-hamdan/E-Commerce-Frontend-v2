@@ -156,7 +156,7 @@ export function Checkout() {
               <h4 className="mb-3 fw-bold text-secondary">1. عنوان الشحن</h4>
               <div className="row g-3 mb-4">
                 <div className="col-md-6">
-                  <label className="form-label">الاسم الكامل</label>
+                  <label className="form-label">الاسم</label>
                   <input
                     type="text"
                     name="fullName"

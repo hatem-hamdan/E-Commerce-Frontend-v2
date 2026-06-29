@@ -6,6 +6,7 @@ import { useCart } from "../Compontes/CartContext";
 import { AccountMenu } from "../Compontes/Logout";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 export function Header() {
   const [showLogin, setShowLogin] = useState(false);
@@ -42,7 +43,7 @@ export function Header() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
         <div className="container-fluid px-2 px-lg-3">
           <Link className="navbar-brand fw-bold" to="/">
-            MyStore
+            القائمة الرئيسية
           </Link>
           <div className="input-group w-50">
             <input
@@ -63,7 +64,7 @@ export function Header() {
             )}
 
             <Link className="nav-link text-white" to="/Order">
-              Orders
+              الطلبات
             </Link>
 
             <div className="position-relative d-inline-block mx-2">
@@ -81,10 +82,9 @@ export function Header() {
 
             {/* 👤 الحساب */}
             <div className="position-relative">
-              <img
-                className="cart-icon"
-                src="/icons/person.png"
-                alt="Account"
+              <FaUserCircle
+                size={32}
+                color="white"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   if (user) {
@@ -94,7 +94,6 @@ export function Header() {
                   }
                 }}
               />
-
               {/* 🟢 كارد الحساب */}
               {showAccountMenu && (
                 <AccountMenu

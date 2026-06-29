@@ -21,11 +21,6 @@ export function HomePage() {
         </div>
       </section>
       <Products />
-
-      {/* Footrer */}
-      <footer className="bg-dark text-white text-center p-4">
-        MyStore © 2026
-      </footer>
     </>
   );
 }

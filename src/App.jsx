@@ -8,6 +8,7 @@ import { AdminDashboard } from "./Pages/AdminDashboard";
 import { Routes, Route } from "react-router";
 import { CartProvider } from "./Compontes/CartContext";
 import { WhatsAppButton } from "./icons/FaWhatsap";
+import { Footer } from "./Footer/Footer";
 function App() {
   // const [count, setCount] = useState(0);
 
@@ -22,6 +23,8 @@ function App() {
         <Route path="/Order" element={<MyOrders />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
       </Routes>
+
+      <Footer />
     </CartProvider>
   );
 }
