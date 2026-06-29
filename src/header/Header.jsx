@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useCart } from "../Compontes/CartContext";
 import { AccountMenu } from "../Compontes/Logout";
 import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 
 export function Header() {
   const [showLogin, setShowLogin] = useState(false);
@@ -43,7 +44,17 @@ export function Header() {
           <Link className="navbar-brand fw-bold" to="/">
             MyStore
           </Link>
+          <div className="input-group w-50">
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Search products..."
+            />
 
+            <button className="btn btn-primary">
+              <FaSearch />
+            </button>
+          </div>
           <div className="navbar-nav ms-auto align-items-center gap-3">
             {user?.role === "Admin" && (
               <Link className="nav-link text-white" to="/AdminDashboard">
@@ -56,7 +67,9 @@ export function Header() {
             </Link>
 
             <div className="position-relative d-inline-block mx-2">
-              <img className="cart-icon" src="buy-again.png" alt="Cart" />
+              <Link to="/CheckOut">
+                <img className="cart-icon" src="buy-again.png" alt="Cart" />
+              </Link>
 
               <span
                 className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
@@ -66,9 +79,6 @@ export function Header() {
               </span>
             </div>
 
-            <Link className="nav-link text-white" to="/CheckOut">
-              Checkout
-            </Link>
             {/* 👤 الحساب */}
             <div className="position-relative">
               <img

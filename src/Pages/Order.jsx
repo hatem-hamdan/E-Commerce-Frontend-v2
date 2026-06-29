@@ -19,7 +19,9 @@ export function MyOrders() {
         );
 
         if (!response.ok) {
-          throw new Error("فشل في جلب الطلبات أو انتهت الجلسة");
+          <>
+            <div> ليس لديك اي طلبات </div>
+          </>;
         }
 
         const data = await response.json();

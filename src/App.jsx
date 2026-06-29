@@ -7,12 +7,15 @@ import { AdminDashboard } from "./Pages/AdminDashboard";
 
 import { Routes, Route } from "react-router";
 import { CartProvider } from "./Compontes/CartContext";
+import { WhatsAppButton } from "./icons/FaWhatsap";
 function App() {
   // const [count, setCount] = useState(0);
 
   return (
     // 👈 2. تغليف الـ Routes بالكامل داخل البروفايدر
     <CartProvider>
+      <WhatsAppButton />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Checkout" element={<Checkout />} />
