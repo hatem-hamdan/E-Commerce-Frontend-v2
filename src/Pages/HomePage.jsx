@@ -10,16 +10,7 @@ export function HomePage() {
   return (
     <>
       <Header />
-      {/* Hero Section */}
-      <section className="hero">
-        <div>
-          <h1>Welcome To My Store</h1>
 
-          <p>Best Products With Best Prices</p>
-
-          <button className="btn btn-light btn-lg mt-3">Shop Now</button>
-        </div>
-      </section>
       <Products />
     </>
   );

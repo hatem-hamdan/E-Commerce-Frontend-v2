@@ -1,14 +1,16 @@
 // import { useState } from "react";
 import "./App.css";
-import { HomePage } from "./Pages/HomePage";
 import { Checkout } from "./Pages/Checkout";
 import { MyOrders } from "./Pages/Order";
 import { AdminDashboard } from "./Pages/AdminDashboard";
+import { Header } from "./Header/Header";
 
 import { Routes, Route } from "react-router";
 import { CartProvider } from "./Compontes/CartContext";
 import { WhatsAppButton } from "./icons/FaWhatsap";
-import { Footer } from "./Footer/Footer";
+import Footer from "./Footer/Footer";
+import Hero from "./Hero/Hero";
+
 function App() {
   // const [count, setCount] = useState(0);
 
@@ -17,8 +19,10 @@ function App() {
     <CartProvider>
       <WhatsAppButton />
 
+      <Header />
+
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Hero />} />
         <Route path="/Checkout" element={<Checkout />} />
         <Route path="/Order" element={<MyOrders />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />

@@ -1,12 +1,16 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import "./Header.css";
+
 import { Login } from "../Compontes/Login";
 import { Register } from "../Compontes/Register";
-import { useState, useEffect } from "react";
-import { useCart } from "../Compontes/CartContext";
 import { AccountMenu } from "../Compontes/Logout";
+import { useCart } from "../Compontes/CartContext";
+
+import { useState, useEffect } from "react";
+
 import axios from "axios";
-import { FaSearch } from "react-icons/fa";
-import { FaUserCircle } from "react-icons/fa";
+
+import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 
 export function Header() {
   const [showLogin, setShowLogin] = useState(false);
@@ -14,7 +18,6 @@ export function Header() {
 
   const [user, setUser] = useState(null);
 
-  // 🟢 حالة إظهار كارد الحساب
   const [showAccountMenu, setShowAccountMenu] = useState(false);
 
   const { cartItems } = useCart();
@@ -40,72 +43,92 @@ export function Header() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-        <div className="container-fluid px-2 px-lg-3">
-          <Link className="navbar-brand fw-bold" to="/">
-            القائمة الرئيسية
-          </Link>
-          <div className="input-group w-50">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search products..."
-            />
+      {/*========================
+            TOP BAR
+      ========================*/}
 
-            <button className="btn btn-primary">
-              <FaSearch />
-            </button>
+      <div className="top-bar">
+        <div className="container">
+          🚚 شحن سريع لجميع مناطق المملكة العربية السعودية
+        </div>
+      </div>
+
+      {/*========================
+            HEADER
+      ========================*/}
+
+      <header className="header">
+        <div className="container navbar">
+          {/* Logo */}
+
+          <div className="logo">
+            <div className="logo-icon">N</div>
+
+            <div className="logo-info">
+              <h2>NexuvoSaudi</h2>
+            </div>
           </div>
-          <div className="navbar-nav ms-auto align-items-center gap-3">
-            {user?.role === "Admin" && (
-              <Link className="nav-link text-white" to="/AdminDashboard">
-                Admin
-              </Link>
-            )}
 
-            <Link className="nav-link text-white" to="/Order">
-              الطلبات
+          {/* Navigation */}
+
+          <nav className="nav-links">
+            <Link to="/" className="active">
+              الرئيسية
             </Link>
 
-            <div className="position-relative d-inline-block mx-2">
-              <Link to="/CheckOut">
-                <img className="cart-icon" src="buy-again.png" alt="Cart" />
-              </Link>
+            <Link to="/products">الشواحن</Link>
 
-              <span
-                className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                style={{ fontSize: "0.7rem" }}
-              >
-                {cartItems.length}
-              </span>
-            </div>
+            <a href="#reviews">آراء العملاء</a>
+          </nav>
 
-            {/* 👤 الحساب */}
-            <div className="position-relative">
-              <FaUserCircle
-                size={32}
-                color="white"
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  if (user) {
-                    setShowAccountMenu(!showAccountMenu);
-                  } else {
-                    setShowLogin(true);
-                  }
-                }}
+          {/* Actions */}
+
+          <div className="actions">
+            {/* Search */}
+
+            <button className="icon-btn">
+              <FaSearch />
+            </button>
+
+            {/* Cart */}
+
+            <Link to="/CheckOut" className="icon-btn cart-btn">
+              <FaShoppingCart />
+
+              <span className="badge">{cartItems.length}</span>
+            </Link>
+
+            {/* User */}
+
+            <button
+              className="login-btn"
+              onClick={() => {
+                if (user) {
+                  setShowAccountMenu(!showAccountMenu);
+                } else {
+                  setShowLogin(true);
+                }
+              }}
+            >
+              <FaUser />
+
+              <span>{user ? user.firstName || "حسابي" : "تسجيل الدخول"}</span>
+            </button>
+
+            {showAccountMenu && (
+              <AccountMenu
+                setUser={setUser}
+                onClose={() => setShowAccountMenu(false)}
               />
-              {/* 🟢 كارد الحساب */}
-              {showAccountMenu && (
-                <AccountMenu
-                  setUser={setUser}
-                  onClose={() => setShowAccountMenu(false)}
-                />
-              )}
-            </div>
+            )}
           </div>
         </div>
-      </nav>
-      {/* Login */}
+      </header>
+
+      {/* ========================
+            LOGIN
+      ======================== */}
+
       {showLogin && (
         <Login
           setUser={setUser}
@@ -117,7 +140,11 @@ export function Header() {
           }}
         />
       )}
-      {/* Register */}
+
+      {/* ========================
+            REGISTER
+      ======================== */}
+
       {showRegister && (
         <Register
           onClose={() => setShowRegister(false)}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { locations } from "../Compontes/locations"; // استيراد ملف المناطق
-import { Header } from "../header/Header";
+import { Header } from "../Header/Header";
 import { useCart } from "../Compontes/CartContext"; // استيراد الكونتيكست
 import { Login } from "../Compontes/Login";
 

@@ -1,63 +1,103 @@
 import "./Footer.css";
 
-export function Footer() {
+import {
+  FaInstagram,
+  FaWhatsapp,
+  FaXTwitter,
+  FaTiktok,
+  FaEnvelope,
+  FaPhone,
+  FaLocationDot,
+} from "react-icons/fa6";
+
+function Footer() {
   return (
-    <footer>
-      <div className="footer-top">
-        <div className="footer-section">
-          <h3>من نحن</h3>
+    <>
+      <div className="footer-divider"></div>
 
-          <img src="/logo.png" alt="MyStore Logo" width="80" />
+      <footer className="footer">
+        <div className="footer-container">
+          {/* Left */}
 
-          <p>
-            MyStore متجر إلكتروني متخصص في بيع الإلكترونيات والإكسسوارات بأفضل
-            الأسعار مع شحن سريع داخل المملكة.
-          </p>
+          <div className="footer-brand">
+            <div className="footer-logo">
+              <div className="logo-icon">N</div>
+
+              <div>
+                <h2>NexuvoSaudi</h2>
+
+                <p>
+                  طاقة صغيرة...
+                  <br />
+                  أداء كبير
+                </p>
+              </div>
+            </div>
+
+            <div className="footer-social">
+              <a href="#">
+                <FaWhatsapp />
+              </a>
+
+              <a href="#">
+                <FaInstagram />
+              </a>
+
+              <a href="#">
+                <FaXTwitter />
+              </a>
+
+              <a href="#">
+                <FaTiktok />
+              </a>
+            </div>
+          </div>
+
+          {/* Center */}
+
+          <div className="footer-links">
+            <h3>روابط سريعة</h3>
+
+            <a href="#">الرئيسية</a>
+
+            <a href="#">المنتجات</a>
+
+            <a href="#">الأسئلة الشائعة</a>
+
+            <a href="#">تواصل معنا</a>
+          </div>
+
+          {/* Right */}
+
+          <div className="footer-contact">
+            <h3>تواصل معنا</h3>
+
+            <p>
+              <FaPhone />
+
+              <span>+966 50 123 4567</span>
+            </p>
+
+            <p>
+              <FaEnvelope />
+
+              <span>info@nexuvosaudi.com</span>
+            </p>
+
+            <p>
+              <FaLocationDot />
+
+              <span>المملكة العربية السعودية</span>
+            </p>
+          </div>
         </div>
 
-        <div className="footer-section">
-          <h3>روابط سريعة</h3>
-
-          <ul>
-            <li>الرئيسية</li>
-            <li>المنتجات</li>
-            <li>طلباتي</li>
-            <li>سياسة الخصوصية</li>
-            <li>الشروط والأحكام</li>
-          </ul>
+        <div className="footer-bottom">
+          © 2026 NexuvoSaudi. جميع الحقوق محفوظة.
         </div>
-
-        <div className="footer-section">
-          <h3>خدمة العملاء</h3>
-
-          <ul>
-            <li>الأسئلة الشائعة</li>
-            <li>سياسة الاسترجاع</li>
-            <li>طرق الدفع</li>
-            <li>تواصل معنا</li>
-          </ul>
-        </div>
-
-        <div className="footer-section">
-          <h3>معلومات المتجر</h3>
-
-          <p>📍 الرياض - المملكة العربية السعودية</p>
-          <p>📞 +966 56 242 9556</p>
-          <p>✉️ support@mystore.com</p>
-
-          <img
-            src="/commercial-register.png"
-            alt="Commercial Register"
-            width="120"
-          />
-
-          <p>السجل التجاري: قريبا</p>
-        </div>
-      </div>
-
-      <div className="footer-bottom">
-        <p>© 2026 MyStore. جميع الحقوق محفوظة.</p>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }
+
+export default Footer;

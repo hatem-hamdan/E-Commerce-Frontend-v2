@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Header } from "../header/Header";
+import { Header } from "../Header/Header";
 export function MyOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
