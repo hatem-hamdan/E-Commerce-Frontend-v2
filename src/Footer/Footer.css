@@ -217,3 +217,60 @@
     0 0 20px rgba(30, 143, 255, 0.45),
     0 0 45px rgba(30, 143, 255, 0.2);
 }
+
+/*==========================
+        RESPONSIVE
+==========================*/
+
+@media (max-width: 992px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+
+    padding: 40px 30px;
+
+    gap: 40px;
+
+    text-align: center;
+  }
+
+  .footer-logo {
+    justify-content: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-contact p {
+    justify-content: center;
+  }
+
+  .footer-links a:hover {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer {
+    margin-top: 80px;
+  }
+
+  .footer-container {
+    padding: 30px 20px;
+
+    border-radius: 20px;
+  }
+
+  .footer-logo h2 {
+    font-size: 22px;
+  }
+
+  .footer-links h3,
+  .footer-contact h3 {
+    font-size: 18px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
+  }
+}

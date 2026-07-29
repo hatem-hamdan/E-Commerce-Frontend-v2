@@ -1,0 +1,409 @@
+/* تنسيقات عامة */
+body {
+  margin: 0;
+  font-family: "Cairo", sans-serif; /* استخدمت خط عربي مشابه للصورة */
+
+  background-color: #0d1117;
+
+  color: white;
+  direction: rtl; /* اتجاه النص من اليمين لليسار */
+  box-sizing: border-box;
+}
+
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.main-product-container {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+/* القسم الأيسر (المعلومات) */
+.product-info-section {
+  flex: 1;
+}
+
+.category-breadcrumb {
+  color: #007bff;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.product-title {
+  font-size: 32px;
+  margin: 0 0 15px 0;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.stars {
+  color: #ffc107;
+}
+
+.rating-count {
+  opacity: 0.7;
+}
+
+.product-description {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.final-price {
+  font-size: 28px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.original-price {
+  text-decoration: line-through;
+  opacity: 0.6;
+  font-size: 18px;
+}
+
+.discount-tag {
+  background-color: #dc3545;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.features-icons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  background: #0b0e15;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.feature-item .icon {
+  font-size: 20px;
+}
+
+/* تنسيق الأقسام الجديدة (السعة واللون) */
+.selection-container {
+  margin-bottom: 25px;
+}
+
+.selection-container h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.options-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.select-btn {
+  padding: 12px 24px;
+  border: 2px solid #222;
+  background-color: #0b0e15;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.select-btn:hover {
+  border-color: #444;
+}
+
+.select-btn.active {
+  border-color: #007bff;
+  background-color: #004a99;
+  font-weight: bold;
+}
+
+/* أزرار الشراء */
+/* ===========================
+        Action Buttons
+=========================== */
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin: 35px 0;
+}
+
+.action-buttons button {
+  height: 58px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* اشترِ الآن */
+
+.btn-primary {
+  flex: 2;
+
+  border: none;
+
+  border: 2px solid #1e8fff;
+
+  color: #fff;
+
+  background: linear-gradient(135deg, #1e8fff, #1677e6);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(30, 143, 255, 0.25);
+
+  background: linear-gradient(135deg, #2a97ff, #1a7cec);
+}
+
+/* إضافة للسلة */
+
+.btn-secondary {
+  flex: 1;
+
+  background: transparent;
+
+  border: 2px solid #1e8fff;
+
+  color: #1e8fff;
+}
+
+.btn-secondary:hover {
+  background: rgba(30, 143, 255, 0.1);
+
+  transform: translateY(-2px);
+}
+.btn-icon-only {
+  width: 50px;
+  background-color: #222;
+  color: #888;
+  font-size: 18px;
+}
+
+.btn-icon-only:hover {
+  background-color: #333;
+  color: #dc3545;
+}
+
+.extra-info-bar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  opacity: 0.7;
+  border-top: 1px solid #222;
+  padding-top: 20px;
+}
+
+/* القسم الأيمن (الصور) */
+.product-gallery-section {
+  flex: 1;
+  position: relative;
+}
+
+.badge-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #333;
+  color: #ffc107;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  z-index: 10;
+}
+
+.main-image-container {
+  background-color: #0b0e15;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.main-image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.wattage-tag {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  font-size: 40px;
+  font-weight: bold;
+  opacity: 0.1;
+}
+
+.thumbnails-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.thumbnails-container img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.thumbnails-container img.active {
+  border-color: #007bff;
+}
+
+.gallery-footer-badges {
+  display: flex;
+  justify-content: space-around;
+  font-size: 12px;
+  opacity: 0.8;
+  background: #0b0e15;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* القسم السفلي (المواصفات والوصف) */
+.details-footer-container {
+  display: flex;
+  gap: 60px;
+  background-color: #0b0e15;
+  padding: 40px;
+  border-radius: 15px;
+}
+
+.specs-column,
+.description-column {
+  flex: 1;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-right: 3px solid #007bff;
+  padding-right: 10px;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #222;
+  font-size: 14px;
+}
+
+.spec-label {
+  opacity: 0.7;
+}
+
+.spec-value {
+  font-weight: bold;
+}
+
+.description-column p {
+  font-size: 14px;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+.description-icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.rating-container:hover {
+  opacity: 0.8;
+}
+
+/*==========================
+        Quantity
+==========================*/
+
+.quantity-box {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  margin-top: 10px;
+}
+
+.qty-btn {
+  width: 45px;
+
+  height: 45px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #111827;
+
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.qty-btn:hover {
+  background: #1e8fff;
+}
+
+.qty-number {
+  min-width: 40px;
+
+  text-align: center;
+
+  font-size: 22px;
+
+  font-weight: bold;
+}

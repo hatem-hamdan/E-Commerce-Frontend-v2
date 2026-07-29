@@ -3,19 +3,21 @@ import { locations } from "../Compontes/locations"; // استيراد ملف ا�
 import { Header } from "../Header/Header";
 import { useCart } from "../Compontes/CartContext"; // استيراد الكونتيكست
 import { Login } from "../Compontes/Login";
-
+import "./Checkout.css";
 export function Checkout() {
-  const { cartItems } = useCart(); // سحب المنتجات الحقيقية من السلة
-
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  const {
+    cartItems,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+    cartTotal,
+    clearCart,
+  } = useCart();
 
   const [formData, setFormData] = useState({
     fullName: "",
     address: "",
     phone: "",
-    cardNumber: "",
-    expiry: "",
-    cvv: "",
   });
 
   const [showLogin, setShowLogin] = useState(false);
@@ -46,22 +48,24 @@ export function Checkout() {
     // لو المستخدم ما سجل دخول أصلاً، نمنعه يكمل الطلب ونحوله للوجين
 
     const finalOrder = {
-      FullName: formData.fullName,
-      PhoneNumber: formData.phone,
-      Region: selectedRegion,
-      City: selectedCity,
-      AddressLine: formData.address,
-      Items: cartItems.map((item) => ({
-        ProductId: item.id,
-        Quantity: item.quantity || 1,
-        Price: item.price,
+      fullName: formData.fullName, // تم التصغير
+      phoneNumber: formData.phone, // تم التصغير
+      region: selectedRegion, // تم التصغير
+      city: selectedCity, // تم التصغير
+      addressLine: formData.address, // تم التصغير
+      items: cartItems.map((item) => ({
+        // تم التصغير
+        productId: 1, // تم التصغير
+        color: item.color, // تم التصغير
+        quantity: item.quantity || 1, // تم التصغير
+        price: item.price, // تم التصغير
       })),
     };
 
     try {
       // 2. إرسال الطلب مع تمرير الـ Authorization Header
       const response = await fetch(
-        "https://storebackend-2-wbm1.onrender.com/api/MyStore/CreateOrder",
+        "https://storev2-3.onrender.com/api/MyStore/CreateOrder",
         {
           method: "POST",
           headers: {
@@ -83,6 +87,17 @@ export function Checkout() {
           setShowLogin(true);
         }, 2000);
 
+        if (cartItems.length === 0) {
+          return (
+            <>
+              <Header />
+              <div className="container text-center my-5">
+                <h3>🛒 السلة فارغة</h3>
+              </div>
+            </>
+          );
+        }
+
         return;
       }
 
@@ -90,6 +105,8 @@ export function Checkout() {
 
       if (response.ok) {
         // 👈 4️⃣ تنبيه النجاح لإتمام الطلب
+
+        clearCart();
         setAlertInfo({
           show: true,
           message: `تم تسجيل طلبك بنجاح في ${selectedCity}! رقم الطلب: #${data.orderId}`,
@@ -133,182 +150,208 @@ export function Checkout() {
 
   return (
     <>
-      <Header />
+      <div className="checkout-page position-relative">
+        {/* Alert */}
 
-      <div className="container my-5 py-5 position-relative">
-        {/* 👈 7️⃣ عرض التنبيه الطائر في الشيك أوت فوق المحتوى مباشرة وتلاشيه تلقائي */}
         {alertInfo.show && (
-          <div
-            className={`alert alert-${alertInfo.type} text-center shadow position-fixed top-0 start-50 translate-middle-x mt-4`}
-            style={{ zIndex: 9999, minWidth: "350px", direction: "rtl" }}
-          >
+          <div className={`alert alert-${alertInfo.type} checkout-alert`}>
             {alertInfo.type === "success" ? "✅ " : "❌ "}
             {alertInfo.message}
           </div>
         )}
 
-        <h2 className="mb-4 fw-bold text-end">إتمام عملية الشراء</h2>
+        <div className="container">
+          {/* Hero */}
 
-        <div className="row g-5 text-end" style={{ direction: "rtl" }}>
-          {/* العمود الأيمن: بيانات الشحن والدفع */}
-          <div className="col-lg-8">
-            <form onSubmit={handleOrderSubmit} className="card shadow-sm p-4">
-              <h4 className="mb-3 fw-bold text-secondary">1. عنوان الشحن</h4>
-              <div className="row g-3 mb-4">
-                <div className="col-md-6">
-                  <label className="form-label">الاسم</label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    className="form-control"
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="col-md-6">
-                  <label className="form-label">رقم الجوال</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    className="form-control"
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="col-md-4">
-                  <label className="form-label">العنوان (الحي / الشارع)</label>
-                  <input
-                    type="text"
-                    name="address"
-                    className="form-control"
-                    onChange={handleChange}
-                    required
-                  />
+          <section className="checkout-hero">
+            <span className="checkout-badge">🔒 عملية شراء آمنة</span>
+
+            <h1>
+              إتمام <span>الطلب</span>
+            </h1>
+
+            <p>
+              أكمل بيانات الشحن الخاصة بك، وسيتم التواصل معك لتأكيد الطلب قبل
+              الشحن.
+            </p>
+          </section>
+
+          <div className="checkout-wrapper" style={{ direction: "rtl" }}>
+            {/* =========================
+            RIGHT SIDE
+      ========================= */}
+
+            <div className="checkout-form">
+              <form onSubmit={handleOrderSubmit} className="checkout-card">
+                <h3 className="section-title">📦 عنوان الشحن</h3>
+
+                <div className="checkout-grid">
+                  {/* الاسم */}
+
+                  <div className="input-group">
+                    <label>الاسم الكامل</label>
+
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="اكتب اسمك الكامل"
+                      required
+                    />
+                  </div>
+
+                  {/* الجوال */}
+
+                  <div className="input-group">
+                    <label>رقم الجوال</label>
+
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="05xxxxxxxx"
+                      required
+                    />
+                  </div>
+
+                  {/* المنطقة */}
+
+                  <div className="input-group">
+                    <label>المنطقة</label>
+
+                    <select
+                      value={selectedRegion}
+                      onChange={handleRegionChange}
+                      required
+                    >
+                      <option value="">اختر المنطقة</option>
+
+                      {Object.keys(locations).map((region) => (
+                        <option key={region} value={region}>
+                          {region}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* المدينة */}
+
+                  <div className="input-group">
+                    <label>المدينة</label>
+
+                    <select
+                      value={selectedCity}
+                      onChange={(e) => setSelectedCity(e.target.value)}
+                      disabled={!selectedRegion}
+                      required
+                    >
+                      <option value="">اختر المدينة</option>
+
+                      {(locations[selectedRegion] || []).map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* العنوان */}
+
+                  <div className="input-group full-width">
+                    <label>العنوان بالتفصيل</label>
+
+                    <textarea
+                      rows="4"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      placeholder="الحي - الشارع - رقم المبنى"
+                      required
+                    />
+                  </div>
                 </div>
 
-                {/* كومبو المنطقة */}
-                <div className="col-md-4">
-                  <label className="form-label">المنطقة</label>
-                  <select
-                    className="form-select"
-                    value={selectedRegion}
-                    onChange={handleRegionChange}
-                    required
-                  >
-                    <option value="">اختر المنطقة...</option>
-                    {Object.keys(locations).map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
-                  </select>
+                <div className="section-divider"></div>
+
+                <h3 className="section-title">💳 طريقة الدفع</h3>
+
+                <div className="payment-card">
+                  <label className="payment-option active">
+                    <input type="radio" checked readOnly />
+
+                    <div>
+                      <h4>الدفع عند الاستلام</h4>
+
+                      <p>سيتم الدفع نقدًا عند استلام الطلب.</p>
+                    </div>
+                  </label>
                 </div>
 
-                {/* كومبو المدينة */}
-                <div className="col-md-4">
-                  <label className="form-label">المدينة / المحافظة</label>
-                  <select
-                    className="form-select"
-                    value={selectedCity}
-                    onChange={(e) => setSelectedCity(e.target.value)}
-                    required
-                    disabled={!selectedRegion}
-                  >
-                    <option value="">اختر المدينة...</option>
-                    {(locations[selectedRegion] || []).map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <hr />
-
-              <h4 className="my-3 fw-bold text-secondary">2. تفاصيل الدفع</h4>
-              <div className="row g-3 mb-4">
-                <div className="col-md-6">
-                  <label className="form-label">رقم البطاقة</label>
-                  <input
-                    type="text"
-                    name="cardNumber"
-                    className="form-control"
-                    placeholder="1234 5678 9101 1121"
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="col-md-3">
-                  <label className="form-label">تاريخ الانتهاء</label>
-                  <input
-                    type="text"
-                    name="expiry"
-                    className="form-control"
-                    placeholder="MM/YY"
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="col-md-3">
-                  <label className="form-label">رمز الـ CVV</label>
-                  <input
-                    type="text"
-                    name="cvv"
-                    className="form-control"
-                    placeholder="123"
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <button type="submit" className="btn btn-dark btn-lg w-100 mt-3">
-                تأكيد الطلب والدفع
-              </button>
-            </form>
+                <button type="submit" className="checkout-btn">
+                  تأكيد الطلب
+                </button>
+              </form>
+            </div>
           </div>
 
-          {/* العمود الأيسر: ملخص المنتجات */}
-          <div className="col-lg-4">
-            <div className="card shadow-sm p-4 bg-light">
-              <h4 className="mb-4 fw-bold text-secondary">ملخص السلة</h4>
+          {/* =========================
+      ORDER SUMMARY
+========================= */}
+
+          <div className="checkout-summary">
+            <div className="summary-card">
+              <h3>ملخص الطلب</h3>
 
               {cartItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="d-flex align-items-center mb-3 pb-3 border-bottom"
-                >
-                  <img
-                    src={item.image}
-                    className="rounded ms-3"
-                    alt={item.title}
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <div className="flex-grow-1 text-start ms-2">
-                    <h6 className="m-0 fw-bold">{item.title}</h6>
-                    <small className="text-muted">الكمية: 1</small>
+                <div className="summary-product" key={index}>
+                  <img src={item.image} alt={item.title} />
+
+                  <div className="product-info">
+                    <h5>{item.title}</h5>
+
+                    <p>اللون: {item.color}</p>
+
+                    <div className="quantity-controls">
+                      <button
+                        type="button"
+                        onClick={() => decreaseQuantity(item.id, item.color)}
+                      >
+                        -
+                      </button>
+
+                      <span>{item.quantity}</span>
+
+                      <button
+                        type="button"
+                        onClick={() => increaseQuantity(item.id, item.color)}
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="remove-item-btn"
+                      onClick={() => removeFromCart(item.id, item.color)}
+                    >
+                      حذف
+                    </button>
                   </div>
-                  <span className="fw-bold">${item.price}</span>
+
+                  <strong>{item.price * item.quantity} ر.س</strong>
                 </div>
               ))}
 
-              <div className="d-flex justify-content-between mb-2 mt-4">
-                <span>المجموع الفرعي:</span>
-                <span>${totalPrice}</span>
+              <div className="summary-row">
+                <span>الشحن</span>
+                <span className="free">مجاني</span>
               </div>
-              <div className="d-flex justify-content-between mb-2">
-                <span>الشحن:</span>
-                <span className="text-success">مجاني</span>
-              </div>
-              <hr />
-              <div className="d-flex justify-content-between mb-2 fw-bold fs-5">
-                <span>الإجمالي العام:</span>
-                <span className="text-danger">${totalPrice}</span>
+
+              <div className="summary-row">
+                <span>المجموع</span>
+                <strong>{cartTotal} ر.س</strong>
               </div>
             </div>
           </div>

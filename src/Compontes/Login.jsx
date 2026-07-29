@@ -39,21 +39,24 @@ export function Login({
     };
 
     try {
-      const response = await fetch("https://storebackend-2-wbm1.onrender.com/api/MyStore/Login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://storev2-3.onrender.com/api/MyStore/Login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(loginData),
         },
-        credentials: "include",
-        body: JSON.stringify(loginData),
-      });
+      );
 
       const result = await response.json();
 
       if (response.ok) {
         // 🟢 جلب بيانات المستخدم الحالي
         const currentUser = await axios.get(
-          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetCurrentUser",
+          "https://storev2-3.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },

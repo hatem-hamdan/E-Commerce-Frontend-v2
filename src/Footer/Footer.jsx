@@ -35,19 +35,11 @@ function Footer() {
             </div>
 
             <div className="footer-social">
-              <a href="#">
+              <a href="https://wa.me/966562429556?text=السلام عليكم، أرغب بطلب الشاحن.">
                 <FaWhatsapp />
               </a>
 
-              <a href="#">
-                <FaInstagram />
-              </a>
-
-              <a href="#">
-                <FaXTwitter />
-              </a>
-
-              <a href="#">
+              <a href="https://www.tiktok.com/@noew.19">
                 <FaTiktok />
               </a>
             </div>
@@ -81,7 +73,7 @@ function Footer() {
             <p>
               <FaEnvelope />
 
-              <span>info@nexuvosaudi.com</span>
+              <span>hatemhamdan392@gmail.com</span>
             </p>
 
             <p>

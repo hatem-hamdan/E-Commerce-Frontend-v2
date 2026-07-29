@@ -1,4 +1,8 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
+
 import "./Header.css";
 
 import { Login } from "../Compontes/Login";
@@ -6,21 +10,15 @@ import { Register } from "../Compontes/Register";
 import { AccountMenu } from "../Compontes/Logout";
 import { useCart } from "../Compontes/CartContext";
 
-import { useState, useEffect } from "react";
-
-import axios from "axios";
-
-import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
-
 export function Header() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [user, setUser] = useState(null);
 
-  const [showAccountMenu, setShowAccountMenu] = useState(false);
-
   const { cartItems } = useCart();
+
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -44,7 +42,7 @@ export function Header() {
   return (
     <>
       {/*========================
-            TOP BAR
+              TOP BAR
       ========================*/}
 
       <div className="top-bar">
@@ -54,20 +52,35 @@ export function Header() {
       </div>
 
       {/*========================
-            HEADER
+              HEADER
       ========================*/}
 
       <header className="header">
         <div className="container navbar">
-          {/* Logo */}
+          {/* User */}
 
-          <div className="logo">
-            <div className="logo-icon">N</div>
+          <button
+            className="login-btn"
+            onClick={() => {
+              if (user) {
+                setShowAccountMenu(!showAccountMenu);
+              } else {
+                setShowLogin(true);
+              }
+            }}
+          >
+            <FaUser />
+            <span>{user ? user.firstName || "حسابي" : "تسجيل الدخول"}</span>
+          </button>
 
-            <div className="logo-info">
-              <h2>NexuvoSaudi</h2>
-            </div>
-          </div>
+          {/* Search */}
+
+          {/* Cart */}
+
+          <Link to="/CheckOut" className="icon-btn cart-btn">
+            <FaShoppingCart />
+            <span className="badge">{cartCount}</span>
+          </Link>
 
           {/* Navigation */}
 
@@ -75,59 +88,36 @@ export function Header() {
             <Link to="/" className="active">
               الرئيسية
             </Link>
-
-            <Link to="/products">الشواحن</Link>
-
-            <a href="#reviews">آراء العملاء</a>
           </nav>
 
-          {/* Actions */}
-
-          <div className="actions">
-            {/* Search */}
-
-            <button className="icon-btn">
-              <FaSearch />
-            </button>
-
-            {/* Cart */}
-
-            <Link to="/CheckOut" className="icon-btn cart-btn">
-              <FaShoppingCart />
-
-              <span className="badge">{cartItems.length}</span>
+          <nav className="nav-links">
+            <Link to="/" className="active">
+              طلباتي
             </Link>
+          </nav>
 
-            {/* User */}
+          {/* Logo */}
 
-            <button
-              className="login-btn"
-              onClick={() => {
-                if (user) {
-                  setShowAccountMenu(!showAccountMenu);
-                } else {
-                  setShowLogin(true);
-                }
-              }}
-            >
-              <FaUser />
+          <Link to="/" className="logo">
+            <div className="logo-icon">N</div>
 
-              <span>{user ? user.firstName || "حسابي" : "تسجيل الدخول"}</span>
-            </button>
+            <div className="logo-info">
+              <h2>NexuvoSaudi</h2>
+            </div>
+          </Link>
 
-            {showAccountMenu && (
-              <AccountMenu
-                setUser={setUser}
-                onClose={() => setShowAccountMenu(false)}
-              />
-            )}
-          </div>
+          {showAccountMenu && (
+            <AccountMenu
+              setUser={setUser}
+              onClose={() => setShowAccountMenu(false)}
+            />
+          )}
         </div>
       </header>
 
-      {/* ========================
-            LOGIN
-      ======================== */}
+      {/*========================
+              LOGIN
+      ========================*/}
 
       {showLogin && (
         <Login
@@ -141,9 +131,9 @@ export function Header() {
         />
       )}
 
-      {/* ========================
-            REGISTER
-      ======================== */}
+      {/*========================
+              REGISTER
+      ========================*/}
 
       {showRegister && (
         <Register
