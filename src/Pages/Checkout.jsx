@@ -65,7 +65,7 @@ export function Checkout() {
     try {
       // 2. إرسال الطلب مع تمرير الـ Authorization Header
       const response = await fetch(
-        "https://storev2-3.onrender.com/api/MyStore/CreateOrder",
+        "https://fafafaf-gydf.onrender.com/api/MyStore/CreateOrder",
         {
           method: "POST",
           headers: {
