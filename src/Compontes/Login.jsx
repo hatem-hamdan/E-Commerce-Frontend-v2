@@ -56,7 +56,7 @@ export function Login({
       if (response.ok) {
         // 🟢 جلب بيانات المستخدم الحالي
         const currentUser = await axios.get(
-          "https://storev2-3.onrender.com/api/MyStore/GetCurrentUser",
+          "https://fafafaf-gydf.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },
