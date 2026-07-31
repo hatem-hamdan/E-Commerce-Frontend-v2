@@ -12,7 +12,7 @@ function Products() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetProducts",
+          "https://fafafaf-gydf.onrender.com/api/MyStore/GetProducts",
         );
         setProducts(response.data);
       } catch (error) {

@@ -49,7 +49,7 @@ const MainProdect = () => {
   const handleBuyNow = async () => {
     try {
       const response = await fetch(
-        "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetCurrentUser",
+        "https://fafafaf-gydf.onrender.com/api/MyStore/GetCurrentUser",
         {
           method: "GET",
           credentials: "include",

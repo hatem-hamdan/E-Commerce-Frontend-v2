@@ -6,7 +6,7 @@ export function AccountMenu({ user, setUser, onClose }) {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await fetch("https://storebackend-2-wbm1.onrender.com/api/MyStore/Logout", {
+    await fetch("https://fafafaf-gydf.onrender.com/api/MyStore/Logout", {
       method: "POST",
       credentials: "include",
     });

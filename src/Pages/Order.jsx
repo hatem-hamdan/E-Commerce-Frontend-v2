@@ -10,7 +10,7 @@ export function MyOrders() {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          "https://storebackend-2-wbm1.onrender.com/api/MyStore/GetMyOrders",
+          "https://fafafaf-gydf.onrender.com/api/MyStore/GetMyOrders",
           {
             method: "GET",
             credentials: "include",

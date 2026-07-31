@@ -18,7 +18,7 @@ export function Register({ onClose, onSwitchToLogin }) {
 
     try {
       const response = await fetch(
-        "https://storebackend-2-wbm1.onrender.com/api/MyStore/Users",
+        "https://fafafaf-gydf.onrender.com/api/MyStore/Users",
         {
           method: "POST",
           headers: {
