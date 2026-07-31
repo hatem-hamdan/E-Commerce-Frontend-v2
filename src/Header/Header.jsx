@@ -69,8 +69,10 @@ export function Header() {
               }
             }}
           >
-            <FaUser />
-            <span>{user ? user.firstName || "حسابي" : "تسجيل الدخول"}</span>
+            <FaUser className="user-icon" />
+            <span className="user-name">
+              {user ? user.firstName || "حسابي" : "تسجيل الدخول"}
+            </span>
           </button>
 
           {/* Search */}

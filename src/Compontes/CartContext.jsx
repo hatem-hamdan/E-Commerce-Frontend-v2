@@ -41,6 +41,17 @@ export const CartProvider = ({ children }) => {
       // إذا لم يكن موجود أضفه
       return [...prevItems, product];
     });
+
+    // --- كود التتبع الخاص بسناب شات يبدأ من هنا ---
+    if (window.snaptr) {
+      window.snaptr("track", "ADD_CART", {
+        price: product.price,
+        currency: "SAR", // تأكد أنها مطابقة لعملة متجرك
+        item_ids: [product.id.toString()], // سناب يفضل الـ ID كـ String
+        item_category: "General", // يمكنك تغييرها لنوع المنتج إذا أردت
+      });
+    }
+    // --- نهاية كود التتبع ---
   };
 
   // حذف منتج

@@ -455,3 +455,29 @@ body {
     font-size: 18px;
   }
 }
+
+.login-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent; /* إزالة الخلفية الزرقاء */
+  border: 1px solid #ffffff33; /* حدود خفيفة */
+  padding: 8px 16px;
+  border-radius: 50px; /* شكل دائري (كبسولة) */
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #ffffff1a; /* تأثير عند تمرير الفأرة */
+}
+
+.user-icon {
+  font-size: 1.1rem;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
