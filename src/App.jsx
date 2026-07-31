@@ -16,7 +16,7 @@ import MainProdect from "./Pages/MainProdect";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  // const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);ى
 
   return (
     // 👈 2. تغليف الـ Routes بالكامل داخل البروفايدر
