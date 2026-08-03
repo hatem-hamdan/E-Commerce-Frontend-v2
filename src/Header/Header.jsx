@@ -5,15 +5,21 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 
 import "./Header.css";
 
+import Banner from "../Banner/Banner";
+
 import { Login } from "../Compontes/Login";
 import { Register } from "../Compontes/Register";
 import { AccountMenu } from "../Compontes/Logout";
 import { useCart } from "../Compontes/CartContext";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export function Header() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
+
+  const [showMenu, setShowMenu] = useState(false);
+
   const [user, setUser] = useState(null);
 
   const { cartItems } = useCart();
@@ -24,7 +30,7 @@ export function Header() {
     const getCurrentUser = async () => {
       try {
         const response = await axios.get(
-          "https://fafafaf-gydf.onrender.com/api/MyStore/GetCurrentUser",
+          "https://localhost:7078/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },
@@ -57,48 +63,10 @@ export function Header() {
 
       <header className="header">
         <div className="container navbar">
-          {/* User */}
-
-          <button
-            className="login-btn"
-            onClick={() => {
-              if (user) {
-                setShowAccountMenu(!showAccountMenu);
-              } else {
-                setShowLogin(true);
-              }
-            }}
-          >
-            <FaUser className="user-icon" />
-            <span className="user-name">
-              {user ? user.firstName || "حسابي" : "تسجيل الدخول"}
-            </span>
-          </button>
-
-          {/* Search */}
-
-          {/* Cart */}
-
-          <Link to="/CheckOut" className="icon-btn cart-btn">
-            <FaShoppingCart />
-            <span className="badge">{cartCount}</span>
-          </Link>
-
-          {/* Navigation */}
-
-          <nav className="nav-links">
-            <Link to="/" className="active">
-              الرئيسية
-            </Link>
-          </nav>
-
-          <nav className="nav-links">
-            <Link to="/" className="active">
-              طلباتي
-            </Link>
-          </nav>
-
           {/* Logo */}
+          <button className="menu-btn" onClick={() => setShowMenu(!showMenu)}>
+            {showMenu ? <FaTimes /> : <FaBars />}
+          </button>
 
           <Link to="/" className="logo">
             <div className="logo-icon">N</div>
@@ -108,6 +76,51 @@ export function Header() {
             </div>
           </Link>
 
+          {/* Navigation */}
+
+          <nav className={`nav-links ${showMenu ? "open" : ""}`}>
+            <Link
+              to="/"
+              className="nav-link"
+              onClick={() => setShowMenu(false)}
+            >
+              الرئيسية
+            </Link>
+
+            <Link
+              to="/Order"
+              className="nav-link"
+              onClick={() => setShowMenu(false)}
+            >
+              طلباتي
+            </Link>
+          </nav>
+          {/* Actions */}
+
+          <div className="header-actions">
+            <Link to="/CheckOut" className="icon-btn cart-btn">
+              <FaShoppingCart />
+              <span className="badge">{cartCount}</span>
+            </Link>
+
+            <button
+              className="login-btn"
+              onClick={() => {
+                if (user) {
+                  setShowAccountMenu(!showAccountMenu);
+                } else {
+                  setShowLogin(true);
+                }
+              }}
+            >
+              <FaUser className="user-icon" />
+
+              <span className="user-name">
+                {user ? user.firstName || "حسابي" : "تسجيل الدخول"}
+              </span>
+            </button>
+          </div>
+
           {showAccountMenu && (
             <AccountMenu
               setUser={setUser}
@@ -116,6 +129,8 @@ export function Header() {
           )}
         </div>
       </header>
+
+      <Banner />
 
       {/*========================
               LOGIN

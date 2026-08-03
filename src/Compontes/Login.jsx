@@ -39,24 +39,21 @@ export function Login({
     };
 
     try {
-      const response = await fetch(
-        "https://fafafaf-gydf.onrender.com/api/MyStore/Login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify(loginData),
+      const response = await fetch("https://localhost:7078/api/MyStore/Login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        credentials: "include",
+        body: JSON.stringify(loginData),
+      });
 
       const result = await response.json();
 
       if (response.ok) {
         // 🟢 جلب بيانات المستخدم الحالي
         const currentUser = await axios.get(
-          "https://fafafaf-gydf.onrender.com/api/MyStore/GetCurrentUser",
+          "https://localhost:7078/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },

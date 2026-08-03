@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import "./Ordere.css"; // استيراد ملف التنسيقات
+import { Link } from "react-router-dom";
+import "./Ordere.css"; // تأكد من وجود ملف الـ CSS
 
-export function MyOrders() {
+export default function MyOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -10,147 +11,167 @@ export function MyOrders() {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          "https://fafafaf-gydf.onrender.com/api/MyStore/GetMyOrders",
+          "https://localhost:7078/api/MyStore/GetMyOrders",
           {
             method: "GET",
             credentials: "include",
           },
         );
 
+        if (response.status === 401) {
+          setError("LOGIN");
+          return;
+        }
+
+        if (response.status === 404) {
+          setOrders([]);
+          return;
+        }
+
         if (!response.ok) {
-          if (response.status === 404) {
-            throw new Error("ليس لديك أي طلبات سابقة حتى الآن.");
-          }
-          throw new Error("فشل في جلب البيانات. يرجى المحاولة لاحقاً.");
+          throw new Error("حدث خطأ أثناء تحميل الطلبات.");
         }
 
         const data = await response.json();
         setOrders(Array.isArray(data) ? data : []);
-      } catch (err) {
-        setError(err.message);
+      } catch {
+        setError("SERVER");
       } finally {
         setLoading(false);
       }
     };
+
     fetchOrders();
   }, []);
 
-  if (loading)
+  if (loading) {
     return (
-      <div className="d-flex justify-content-center align-items-center orders-page-container">
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">جاري التحميل...</span>
-        </div>
-        <h4 className="text-primary ms-3">جاري تحميل طلباتك...</h4>
+      <div className="orders-loading">
+        <div className="loader"></div>
+        <h2>جاري تحميل طلباتك...</h2>
       </div>
     );
+  }
 
-  if (error)
+  if (error === "LOGIN") {
     return (
-      <div className="container d-flex justify-content-center align-items-center orders-page-container">
-        <div
-          className="alert alert-danger w-100 text-center shadow-lg"
-          role="alert"
-        >
-          <i className="bi bi-exclamation-triangle-fill ms-2"></i>
-          {error}
-        </div>
-      </div>
-    );
+      <div className="orders-empty-page">
+        <div className="orders-empty-card">
+          <div className="empty-icon">🔐</div>
 
-  if (orders.length === 0)
-    return (
-      <div
-        className="container my-5 text-center orders-page-container"
-        dir="rtl"
-      >
-        <div className="card shadow-lg border-0 p-5 order-card">
-          <i className="bi bi-box-seam display-1 text-muted mb-4"></i>
-          <h3 className="text-light fw-bold">طلباتك فارغة!</h3>
-          <p className="text-muted">لم تقم بأي طلبات سابقة حتى الآن.</p>
-          <a
-            href="/"
-            className="btn btn-primary mt-3 w-auto mx-auto px-4 py-2 rounded-pill"
-          >
-            تسوق الآن
-          </a>
+          <h2>يجب تسجيل الدخول</h2>
+
+          <p>سجل دخولك حتى تتمكن من مشاهدة جميع طلباتك السابقة.</p>
+
+          <Link to="/login" className="shop-btn">
+            تسجيل الدخول
+          </Link>
         </div>
       </div>
     );
+  }
+
+  if (error === "SERVER") {
+    return (
+      <div className="orders-empty-page">
+        <div className="orders-empty-card">
+          <div className="empty-icon">⚠️</div>
+
+          <h2>حدث خطأ</h2>
+
+          <p>تعذر تحميل الطلبات حالياً، حاول مرة أخرى لاحقاً.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (orders.length === 0) {
+    return (
+      <div className="orders-empty-page">
+        <div className="orders-empty-card">
+          <div className="empty-icon">📦</div>
+
+          <h2>ليس لديك طلبات حتى الآن</h2>
+
+          <p>عندما تقوم بشراء أي منتج ستظهر جميع طلباتك هنا.</p>
+          <Link to="/" className="shop-btn">
+            ابدأ التسوق
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className="container-fluid py-5 min-vh-100 orders-page-container"
-      dir="rtl"
-    >
-      <div className="container">
-        <h2 className="mb-5 fw-bold orders-title">
-          <i className="bi bi-bag-check-fill ms-3"></i> طلباتي السابقة
-        </h2>
+    <div className="orders-page">
+      <div className="orders-header">
+        <h1>طلباتي</h1>
+        <p>يمكنك متابعة جميع طلباتك السابقة من هنا.</p>
+      </div>
 
+      <div className="orders-list">
         {orders.map((order) => (
-          <div
-            className="card mb-5 shadow-lg border-0 overflow-hidden order-card"
-            key={order.orderId}
-          >
-            <div className="card-header order-header">
+          <div className="order-card" key={order.orderId}>
+            <div className="order-top">
               <div>
-                <span className="fw-bold fs-5 text-white">
-                  رقم الطلب: #{order.orderId}
-                </span>
-                <span className="mx-3 text-muted">|</span>
-                <span className="text-muted">
-                  التاريخ:{" "}
+                <h2>طلب #{order.orderId}</h2>
+
+                <span>
                   {new Date(order.createdAt).toLocaleDateString("ar-SA")}
                 </span>
               </div>
-              <span
-                className={`badge ${order.orderStatus === "Completed" ? "bg-success" : "bg-warning"} rounded-pill`}
+
+              <div
+                className={`status ${
+                  order.orderStatus === "Completed" ? "completed" : "pending"
+                }`}
               >
                 {order.orderStatus === "Completed" ? "مكتمل" : "قيد المراجعة"}
-              </span>
-            </div>
-
-            <div className="card-body order-body">
-              <div className="table-responsive">
-                <table className="table table-borderless table-custom align-middle">
-                  <thead>
-                    <tr>
-                      <th>المنتج</th>
-                      <th>الاسم</th>
-                      <th>الكمية</th>
-                      <th>السعر</th>
-                      <th>الإجمالي</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {order.items.map((item, index) => (
-                      <tr key={index}>
-                        <td>
-                          <img
-                            src={item.productImage}
-                            className="product-img"
-                            alt={item.productName}
-                          />
-                        </td>
-                        <td className="fw-bold">{item.productName}</td>
-                        <td>{item.quantity}</td>
-                        <td className="price-text">{item.itemPrice} ر.س</td>
-                        <td className="text-light">
-                          {item.quantity * item.itemPrice} ر.س
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
               </div>
             </div>
 
-            <div className="card-footer order-footer">
-              <h5 className="mb-0 text-muted ms-3">الإجمالي الكلي:</h5>
-              <h3 className="mb-0 fw-bold price-text">
-                {order.orderTotalPrice} ر.س
-              </h3>
+            <div className="shipping-box">
+              <div className="shipping-item">
+                <span>📍</span>
+                <div>
+                  <small>المدينة</small>
+                  <strong>{order.city}</strong>
+                </div>
+              </div>
+
+              <div className="shipping-item">
+                <span>🏠</span>
+                <div>
+                  <small>العنوان</small>
+                  <strong>{order.addressLine}</strong>
+                </div>
+              </div>
+            </div>
+
+            <div className="products">
+              {order.items.map((item, index) => (
+                <div className="product-row" key={index}>
+                  <img src={item.productImage} alt={item.productName} />
+
+                  <div className="product-info">
+                    <h3>{item.productName}</h3>
+
+                    <p>الكمية: {item.quantity}</p>
+                  </div>
+
+                  <div className="product-price">
+                    <span>{item.itemPrice} ر.س</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="order-footer">
+              <div>
+                <span>الإجمالي</span>
+
+                <h2>{order.orderTotalPrice} ر.س</h2>
+              </div>
             </div>
           </div>
         ))}

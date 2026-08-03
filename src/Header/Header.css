@@ -1,174 +1,169 @@
-/* ===========================
-        GOOGLE FONT
-=========================== */
-
 @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap");
 
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "Tajawal", sans-serif;
 }
 
-body {
-  background: #07111f;
-}
-
-/* ===========================
-          CONTAINER
-=========================== */
-
 .container {
-  width: min(1320px, 92%);
+  width: min(1250px, 94%);
   margin: auto;
 }
 
-/* ===========================
-          TOP BAR
-=========================== */
+/*=========================
+        TOP BAR
+=========================*/
 
 .top-bar {
-  background: #0d1b2e;
-  color: #ffffff;
-  font-size: 14px;
+  background: #0b1524;
+  color: #d9e8ff;
   text-align: center;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px;
+  font-size: 14px;
 }
 
-/* ===========================
-          HEADER
-=========================== */
+/*=========================
+        HEADER
+=========================*/
 
 .header {
   position: sticky;
   top: 0;
   z-index: 999;
 
-  background: rgba(8, 18, 32, 0.92);
+  background: rgba(10, 18, 30, 0.92);
 
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ===========================
-          NAVBAR
-=========================== */
-
 .navbar {
-  min-height: 85px;
+  height: 100px;
 
   display: flex;
 
   justify-content: space-between;
 
   align-items: center;
-
-  gap: 35px;
 }
 
-/* ===========================
-            LOGO
-=========================== */
+/*=========================
+        LOGO
+=========================*/
 
 .logo {
   display: flex;
+
   align-items: center;
-  gap: 14px;
+
+  gap: 12px;
+
   text-decoration: none;
 
-  margin-inline-start: auto;
+  color: white;
 }
 
 .logo-icon {
-  width: 50px;
+  width: 48px;
 
-  height: 50px;
+  height: 48px;
 
-  border-radius: 15px;
+  border-radius: 14px;
 
   background: #1e8fff;
-
-  color: #fff;
 
   display: flex;
 
   justify-content: center;
 
   align-items: center;
+
+  color: white;
 
   font-size: 24px;
 
   font-weight: 800;
 
-  box-shadow: 0 10px 30px rgba(30, 143, 255, 0.35);
+  box-shadow: 0 10px 25px rgba(30, 143, 255, 0.3);
 }
 
 .logo-info h2 {
-  color: white;
+  font-size: 23px;
 
-  font-size: 24px;
-
-  margin: 0;
+  font-weight: 800;
 }
 
-/* ===========================
-        NAV LINKS
-=========================== */
+/*=========================
+      NAVIGATION
+=========================*/
 
 .nav-links {
   display: flex;
 
-  align-items: center;
-
-  gap: 35px;
+  gap: 28px;
 }
 
-.nav-links a {
+.nav-link {
+  color: #cfd9e8;
+
   text-decoration: none;
 
-  color: #c8d3e5;
-
-  font-size: 15px;
-
   font-weight: 600;
+
+  transition: 0.25s;
+
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #1e8fff;
+}
+
+.nav-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: -8px;
+
+  width: 0;
+
+  height: 2px;
+
+  background: #1e8fff;
 
   transition: 0.3s;
 }
 
-.nav-links a:hover {
-  color: #1e8fff;
+.nav-link:hover::after {
+  width: 100%;
 }
 
-.nav-links .active {
-  color: #1e8fff;
-}
+/*=========================
+      ACTIONS
+=========================*/
 
-/* ===========================
-          ACTIONS
-=========================== */
-
-.actions {
+.header-actions {
   display: flex;
 
   align-items: center;
 
-  gap: 18px;
+  gap: 15px;
 }
 
-/* ===========================
-        ICON BUTTON
-=========================== */
-
 .icon-btn {
-  width: 48px;
+  width: 44px;
 
-  height: 48px;
+  height: 44px;
 
-  border: none;
+  border-radius: 12px;
 
-  border-radius: 14px;
-
-  background: #101c2d;
+  background: #111d2d;
 
   color: white;
 
@@ -178,35 +173,27 @@ body {
 
   align-items: center;
 
-  cursor: pointer;
-
-  transition: 0.3s;
+  text-decoration: none;
 
   position: relative;
 
-  text-decoration: none;
+  transition: 0.25s;
 }
 
 .icon-btn:hover {
   background: #1e8fff;
-
-  transform: translateY(-3px);
 }
-
-/* ===========================
-            BADGE
-=========================== */
 
 .badge {
   position: absolute;
 
-  top: -6px;
+  top: -5px;
 
-  right: -6px;
+  right: -5px;
 
-  width: 22px;
+  width: 20px;
 
-  height: 22px;
+  height: 20px;
 
   border-radius: 50%;
 
@@ -220,264 +207,190 @@ body {
 
   align-items: center;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: bold;
 }
 
-/* ===========================
-        LOGIN BUTTON
-=========================== */
-
 .login-btn {
+  height: 44px;
+
+  padding: 0 18px;
+
   display: flex;
 
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 
-  height: 48px;
+  border-radius: 12px;
 
-  padding: 0 22px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
-  border: none;
-
-  border-radius: 14px;
-
-  background: #1e8fff;
+  background: #111d2d;
 
   color: white;
 
   cursor: pointer;
 
-  font-size: 15px;
-
-  font-weight: 700;
-
-  transition: 0.3s;
+  transition: 0.25s;
 }
 
 .login-btn:hover {
-  background: #2d98ff;
-
-  transform: translateY(-3px);
-
-  box-shadow: 0 10px 25px rgba(30, 143, 255, 0.35);
+  background: #1e8fff;
 }
 
-/* ===========================
-        RESPONSIVE
-=========================== */
+.user-name {
+  font-size: 14px;
 
-@media (max-width: 992px) {
-  .nav-links {
+  font-weight: 600;
+}
+
+/*=========================
+      RESPONSIVE
+=========================*/
+
+@media (max-width: 900px) {
+  .logo-info {
     display: none;
-  }
-
-  .login-btn span {
-    display: none;
-  }
-
-  .navbar {
-    min-height: 75px;
-  }
-
-  .logo-info h2 {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 600px) {
-  .actions {
-    gap: 10px;
-  }
-
-  .icon-btn {
-    width: 42px;
-
-    height: 42px;
-  }
-
-  .login-btn {
-    height: 42px;
-
-    padding: 0 14px;
-  }
-
-  .logo-icon {
-    width: 42px;
-
-    height: 42px;
-
-    font-size: 20px;
-  }
-
-  .logo-info h2 {
-    font-size: 18px;
-  }
-}
-
-/* ===========================
-        RESPONSIVE
-=========================== */
-
-/* Laptop */
-
-@media (max-width: 1200px) {
-  .navbar {
-    gap: 20px;
   }
 
   .nav-links {
-    gap: 22px;
-  }
-
-  .logo-info h2 {
-    font-size: 22px;
-  }
-
-  .login-btn {
-    padding: 0 18px;
+    gap: 18px;
   }
 }
-
-/* Tablet */
-
-@media (max-width: 992px) {
-  .navbar {
-    min-height: 72px;
-    gap: 15px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .login-btn span {
-    display: none;
-  }
-
-  .login-btn {
-    width: 46px;
-    padding: 0;
-    justify-content: center;
-  }
-
-  .logo-info h2 {
-    font-size: 20px;
-  }
-
-  .logo-icon {
-    width: 46px;
-    height: 46px;
-    font-size: 22px;
-  }
-
-  .icon-btn {
-    width: 46px;
-    height: 46px;
-  }
-}
-
-/* Mobile */
 
 @media (max-width: 768px) {
   .top-bar {
     font-size: 12px;
-    padding: 8px 10px;
-  }
-
-  .container {
-    width: 95%;
   }
 
   .navbar {
-    min-height: 68px;
-    gap: 10px;
-  }
-
-  .logo-info h2 {
-    display: none;
-  }
-
-  .logo {
-    gap: 8px;
-  }
-
-  .icon-btn,
-  .login-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+    height: 66px;
   }
 
   .login-btn {
     padding: 0;
+
+    width: 42px;
+
     justify-content: center;
   }
 
+  .user-name {
+    display: none;
+  }
+
   .logo-icon {
-    width: 42px;
-    height: 42px;
+    width: 96px;
+
+    height: 40px;
+
     font-size: 20px;
-    border-radius: 12px;
+  }
+
+  .icon-btn {
+    width: 40px;
+
+    height: 40px;
+  }
+
+  .logo {
+    position: relative;
+    right: -90px;
   }
 }
 
-/* Small Mobile */
-
 @media (max-width: 480px) {
-  .navbar {
-    min-height: 64px;
-    gap: 8px;
+  .container {
+    width: 96%;
   }
 
-  .top-bar {
-    font-size: 11px;
-    line-height: 1.5;
+  .navbar {
+    height: 62px;
+  }
+
+  .logo-icon {
+    width: 77px;
+
+    height: 36px;
+
+    font-size: 18px;
+    left: 5%;
   }
 
   .icon-btn,
   .login-btn {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+
+    height: 36px;
   }
 
   .badge {
     width: 18px;
+
     height: 18px;
-    font-size: 10px;
+
+    font-size: 9px;
   }
 
-  .logo-icon {
-    width: 38px;
-    height: 38px;
-    font-size: 18px;
+  .logo {
+    position: relative;
+    right: -50px;
   }
 }
 
-.login-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: transparent; /* إزالة الخلفية الزرقاء */
-  border: 1px solid #ffffff33; /* حدود خفيفة */
-  padding: 8px 16px;
-  border-radius: 50px; /* شكل دائري (كبسولة) */
+/*=========================
+      MOBILE MENU
+=========================*/
+
+.menu-btn {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: #111d2d;
   color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: 20px;
+  transition: 0.3s;
 }
 
-.login-btn:hover {
-  background-color: #ffffff1a; /* تأثير عند تمرير الفأرة */
+.menu-btn:hover {
+  background: #1e8fff;
 }
 
-.user-icon {
-  font-size: 1.1rem;
-}
+@media (max-width: 768px) {
+  .menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.user-name {
-  font-size: 0.9rem;
-  font-weight: 500;
+  .nav-links {
+    position: absolute;
+    top: 74px;
+    left: 0;
+    width: 100%;
+    background: #0d1624;
+    flex-direction: column;
+    display: none;
+    gap: 0;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 15px 25px;
+  }
+
+  .nav-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
 }

@@ -22,20 +22,26 @@ const MainProdect = () => {
 
   const { addToCart } = useCart();
 
-  const images = ["image_0.png", "aa.png", "charger1.png", "Charger3.png"];
+  const media = [
+    { type: "image", src: "t1.png" },
+    { type: "image", src: "t2.png" },
+    { type: "image", src: "t3.png" },
+    { type: "image", src: "t4.png" },
 
-  const [selectedImage, setSelectedImage] = useState(images[0]);
+    { type: "image", src: "Charger3.png" },
+    { type: "video", src: "nq4y7v-h264-hd.mp4" },
+  ];
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const selectedMedia = media[selectedIndex];
 
   const nextImage = () => {
-    const currentIndex = images.indexOf(selectedImage);
-    const nextIndex = (currentIndex + 1) % images.length;
-    setSelectedImage(images[nextIndex]);
+    setSelectedIndex((prev) => (prev + 1) % media.length);
   };
 
   const prevImage = () => {
-    const currentIndex = images.indexOf(selectedImage);
-    const prevIndex = (currentIndex - 1 + images.length) % images.length;
-    setSelectedImage(images[prevIndex]);
+    setSelectedIndex((prev) => (prev - 1 + media.length) % media.length);
   };
 
   // إعداد اللمس (Swipe)
@@ -215,7 +221,20 @@ const MainProdect = () => {
               <button className="nav-arrow left" onClick={prevImage}>
                 ❮
               </button>
-              <img src={selectedImage} alt="شاحن محمول" />
+
+              {selectedMedia.type === "image" ? (
+                <img src={selectedMedia.src} alt="شاحن محمول" />
+              ) : (
+                <video
+                  src={selectedMedia.src}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              )}
+
               <button className="nav-arrow right" onClick={nextImage}>
                 ❯
               </button>
@@ -223,15 +242,28 @@ const MainProdect = () => {
             </div>
 
             <div className="thumbnails-container">
-              {images.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`صورة ${index + 1}`}
-                  className={selectedImage === img ? "active" : ""}
-                  onClick={() => setSelectedImage(img)}
-                />
-              ))}
+              {media.map((item, index) =>
+                item.type === "image" ? (
+                  <img
+                    key={index}
+                    src={item.src}
+                    alt={`صورة ${index + 1}`}
+                    className={selectedIndex === index ? "active" : ""}
+                    onClick={() => setSelectedIndex(index)}
+                  />
+                ) : (
+                  <video
+                    key={index}
+                    src={item.src}
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                    className={selectedIndex === index ? "active" : ""}
+                    onClick={() => setSelectedIndex(index)}
+                  />
+                ),
+              )}
             </div>
             <div className="gallery-footer-badges">
               <span>✓ تصميم أنيق ومتين</span>
@@ -242,17 +274,18 @@ const MainProdect = () => {
         </div>
 
         {/* قسم المواصفات والوصف (الأسفل) */}
+
         <div className="details-footer-container">
           <div className="specs-column">
             <h2>المواصفات</h2>
             {[
-              { label: "السعة", value: "4000mAh" }, // السعة تتغير حسب الاختيار
+              { label: "السعة", value: "1500mAh" },
               { label: "نوع البطارية", value: "Lithium Polymer" },
-              { label: "المدخل", value: "Type-C (5V/2A)" },
-              { label: "المخرج", value: "Type-C (5V/2A)" },
-              { label: "القدرة", value: "20W Max" },
-              { label: "الوزن", value: "70 جرام" },
-              { label: "الأبعاد", value: "7 × 5 × 1.8 سم" },
+              { label: "منفذ الشحن", value: "USB Type-C" },
+              { label: "المنفذ", value: "Type-C أو Lightning (حسب الإصدار)" },
+              { label: "الاستخدام", value: "شحن الطوارئ" },
+              { label: "التصميم", value: "سلسلة مفاتيح محمولة" },
+              { label: "اللون", value: "أسود / وردي" },
               { label: "الضمان", value: "12 شهر" },
             ].map((spec) => (
               <div key={spec.label} className="spec-row">
@@ -261,17 +294,27 @@ const MainProdect = () => {
               </div>
             ))}
           </div>
+
           <div className="description-column">
             <h2>الوصف</h2>
-            <p>شاحن محمول صغير الحجم يمكنك حمله معك أينما ذهبت.</p>
-            <p>يدعم الشحن السريع بقوة 20W لتجربة شحن فعالة وآمنة.</p>
-            <p>مصمم بجودة عالية مع حماية متعددة ضد الشحن الزائد والحرارة.</p>
-            <p>مثالي للاستخدام اليومي والسفر.</p>
+            <p>
+              باور بانك صغير الحجم بتصميم أنيق يمكن تعليقه مع مفاتيحك أو حقيبتك.
+            </p>
+            <p>
+              مزود بكيبل مدمج ليمنحك شحنًا سريعًا وسهلًا دون الحاجة لحمل كيابل
+              إضافية.
+            </p>
+            <p>
+              مثالي للاستخدام اليومي والطوارئ والسفر، ليبقى هاتفك جاهزًا وقت
+              الحاجة.
+            </p>
+            <p>متوفر بإصدارين لأجهزة iPhone وAndroid.</p>
+
             <div className="description-icons">
-              <span>⏱️ شحن سريع 20W PD</span>
-              <span>🛡️ حماية من الشحن الزائد</span>
-              <span>⚡ حماية من القصر الكهربائي</span>
-              <span>🌡️ درجة حرارة آمنة</span>
+              <span>🔋 سعة 1500mAh</span>
+              <span>🔌 كيبل مدمج</span>
+              <span>🎒 صغير وخفيف</span>
+              <span>📱 يدعم iPhone وAndroid</span>
             </div>
           </div>
         </div>

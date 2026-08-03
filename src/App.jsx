@@ -1,7 +1,9 @@
 // import { useState } from "react";
 import "./App.css";
 import { Checkout } from "./Pages/Checkout";
-import { MyOrders } from "./Pages/Order";
+
+import MyOrders from "./Pages/Order";
+
 import { AdminDashboard } from "./Pages/AdminDashboard";
 import { Header } from "./Header/Header";
 
@@ -10,6 +12,7 @@ import { CartProvider } from "./Compontes/CartContext";
 import { WhatsAppButton } from "./icons/FaWhatsap";
 import Footer from "./Footer/Footer";
 import Hero from "./Hero/Hero";
+import Hero2 from "./Hero/Hero2";
 
 import MainProdect from "./Pages/MainProdect";
 
@@ -33,7 +36,7 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Hero />} />
+        <Route path="/" element={<Hero2 />} />
         <Route path="/Checkout" element={<Checkout />} />
         <Route path="/Order" element={<MyOrders />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
