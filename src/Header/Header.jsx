@@ -5,7 +5,6 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 
 import "./Header.css";
 
-
 import { Login } from "../Compontes/Login";
 import { Register } from "../Compontes/Register";
 import { AccountMenu } from "../Compontes/Logout";
@@ -65,9 +64,8 @@ export function Header() {
           </button>
 
           <Link to="/" className="logo">
-            <div className="logo-icon">N</div>
-
             <div className="logo-info">
+              <br />
               <h2>NexuvoSaudi</h2>
             </div>
           </Link>
