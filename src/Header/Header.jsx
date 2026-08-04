@@ -64,10 +64,8 @@ export function Header() {
           </button>
 
           <Link to="/" className="logo">
-            <div className="logo-info">
-              <br />
-              <h2>NexuvoSaudi</h2>
-            </div>
+            <br />
+            <h2>NexuvoSaudi</h2>
           </Link>
 
           {/* Navigation */}
