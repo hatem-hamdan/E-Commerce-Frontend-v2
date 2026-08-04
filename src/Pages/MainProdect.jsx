@@ -19,6 +19,7 @@ const MainProdect = () => {
 
   const [selectedColor, setSelectedColor] = useState("أسود");
   const [quantity, setQuantity] = useState(1);
+  const [selectedDevice, setSelectedDevice] = useState("iPhone");
 
   const { addToCart } = useCart();
 
@@ -83,6 +84,9 @@ const MainProdect = () => {
         image: "white.png",
         price: 89,
         color: selectedColor,
+
+        device: selectedDevice,
+
         quantity: quantity,
       });
 
@@ -115,23 +119,24 @@ const MainProdect = () => {
             </a>
 
             <p className="product-description">
-              شاحن محمول صغير الحجم، سريع الشحن، متوافق مع أجهزة iPhone و
-              Android. مثالي للاستخدام اليومي والتنقل.
+              لا تدع بطارية هاتفك تنفد في اللحظات المهمة. باور بانك صغير وخفيف
+              بتصميم أنيق، سهل الحمل مع مفاتيحك أو حقيبتك، وجاهز لشحن هاتفك في
+              أي وقت.
             </p>
 
             <div className="price-section">
-              <span className="final-price">89 ر.س</span>
-              <span className="original-price">129 ر.س</span>
-              <span className="discount-tag">خصم 31%</span>
+              <span className="final-price">50 ر.س</span>
+              <span className="original-price">99 ر.س</span>
+              <span className="discount-tag">خصم 49%</span>
             </div>
 
             {/* الأيقونات الأربعة الصغيرة */}
             <div className="features-icons">
               {[
-                { icon: "⚡", text: "شحن سريع" },
-                { icon: "🔌", text: "منفذ Type-C" },
+                { icon: "⚡", text: "جاهز وقت الحاجة" },
+                { icon: "🔌", text: "يدعم iPhone و Android" },
                 { icon: "🛡️", text: "حماية متعددة" },
-                { icon: "🪶", text: "خفيف الوزن" },
+                { icon: "🎒", text: "خفيف وسهل الحمل" },
               ].map((item, index) => (
                 <div key={index} className="feature-item">
                   <span className="icon">{item.icon}</span>
@@ -144,13 +149,31 @@ const MainProdect = () => {
             <div className="selection-container">
               <h3>اختر اللون:</h3>
               <div className="options-grid">
-                {["أسود", "أبيض"].map((col) => (
+                {["أسود", "زهري"].map((col) => (
                   <button
                     key={col}
                     className={`select-btn ${selectedColor === col ? "active" : ""}`}
                     onClick={() => setSelectedColor(col)}
                   >
                     {col}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="selection-container">
+              <h3>اختر نوع الجهاز:</h3>
+
+              <div className="options-grid">
+                {["iPhone", "Android"].map((device) => (
+                  <button
+                    key={device}
+                    className={`select-btn ${
+                      selectedDevice === device ? "active" : ""
+                    }`}
+                    onClick={() => setSelectedDevice(device)}
+                  >
+                    {device}
                   </button>
                 ))}
               </div>
@@ -188,9 +211,11 @@ const MainProdect = () => {
                   addToCart({
                     id: 1,
                     title: "شاحن محمول صغير",
-                    image: "white.png",
-                    price: 89,
+                    image: selectedColor === "أسود" ? "K1.png" : "K2.png",
+                    price: 50,
                     color: selectedColor,
+
+                    device: selectedDevice,
                     quantity: quantity,
                   });
 
@@ -209,7 +234,7 @@ const MainProdect = () => {
             <div className="extra-info-bar">
               <div>🌐 عالمي</div>
               <div>🚚 شحن خلال 3-5 أيام</div>
-              <div>🛡️ ضمان 24/7</div>
+              <div>📱يدعم Type-C و Lightning </div>
             </div>
           </div>
 
@@ -238,7 +263,6 @@ const MainProdect = () => {
               <button className="nav-arrow right" onClick={nextImage}>
                 ❯
               </button>
-              <div className="wattage-tag">20W</div>
             </div>
 
             <div className="thumbnails-container">
@@ -286,7 +310,6 @@ const MainProdect = () => {
               { label: "الاستخدام", value: "شحن الطوارئ" },
               { label: "التصميم", value: "سلسلة مفاتيح محمولة" },
               { label: "اللون", value: "أسود / وردي" },
-              { label: "الضمان", value: "12 شهر" },
             ].map((spec) => (
               <div key={spec.label} className="spec-row">
                 <span className="spec-label">{spec.label}</span>

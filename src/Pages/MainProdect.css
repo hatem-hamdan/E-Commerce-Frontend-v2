@@ -447,3 +447,151 @@ h2 {
     display: none;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*==========================
+        Mobile
+===========================*/
+
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 20px 15px;
+  }
+
+  .main-product-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* خلي الصور أول */
+  .product-gallery-section {
+    order: 1;
+  }
+
+  .product-info-section {
+    order: 2;
+  }
+
+  .product-title {
+    font-size: 28px;
+  }
+
+  .product-description {
+    font-size: 15px;
+  }
+
+  .price-section {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .features-icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .feature-item {
+    text-align: center;
+  }
+
+  .options-grid {
+    flex-wrap: wrap;
+  }
+
+  .select-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+
+  .extra-info-bar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .main-image-container img,
+  .main-image-container video {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+  }
+
+  .thumbnails-container {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+  }
+
+  .gallery-footer-badges {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .details-footer-container {
+    flex-direction: column;
+    padding: 25px 20px;
+    gap: 30px;
+  }
+
+  .description-icons {
+    grid-template-columns: 1fr;
+  }
+}

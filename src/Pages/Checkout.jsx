@@ -59,9 +59,10 @@ export function Checkout() {
         color: item.color, // تم التصغير
         quantity: item.quantity || 1, // تم التصغير
         price: item.price, // تم التصغير
+        deviceType: item.device,
       })),
     };
-
+    console.log(finalOrder);
     try {
       // 2. إرسال الطلب مع تمرير الـ Authorization Header
       const response = await fetch(
@@ -313,10 +314,14 @@ export function Checkout() {
 
                     <p>اللون: {item.color}</p>
 
+                    <p>نوع الجهاز: {item.device}</p>
+
                     <div className="quantity-controls">
                       <button
                         type="button"
-                        onClick={() => decreaseQuantity(item.id, item.color)}
+                        onClick={() =>
+                          decreaseQuantity(item.id, item.color, item.device)
+                        }
                       >
                         -
                       </button>
@@ -325,7 +330,9 @@ export function Checkout() {
 
                       <button
                         type="button"
-                        onClick={() => increaseQuantity(item.id, item.color)}
+                        onClick={() =>
+                          increaseQuantity(item.id, item.color, item.device)
+                        }
                       >
                         +
                       </button>
@@ -334,7 +341,9 @@ export function Checkout() {
                     <button
                       type="button"
                       className="remove-item-btn"
-                      onClick={() => removeFromCart(item.id, item.color)}
+                      onClick={() =>
+                        removeFromCart(item.id, item.color, item.device)
+                      }
                     >
                       حذف
                     </button>

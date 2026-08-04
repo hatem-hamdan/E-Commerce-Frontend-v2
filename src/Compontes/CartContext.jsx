@@ -24,12 +24,17 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => {
       // البحث عن نفس المنتج
       const existingItem = prevItems.find(
-        (item) => item.id === product.id && item.color === product.color,
+        (item) =>
+          item.id === product.id &&
+          item.color === product.color &&
+          item.device === product.device,
       );
       // إذا كان المنتج موجود
       if (existingItem) {
         return prevItems.map((item) =>
-          item.id === product.id && item.color === product.color
+          item.id === product.id &&
+          item.color === product.color &&
+          item.device === product.device
             ? {
                 ...item,
                 quantity: item.quantity + product.quantity,
@@ -55,9 +60,12 @@ export const CartProvider = ({ children }) => {
   };
 
   // حذف منتج
-  const removeFromCart = (id, color) => {
+  const removeFromCart = (id, color, device) => {
     setCartItems((prevItems) =>
-      prevItems.filter((item) => !(item.id === id && item.color === color)),
+      prevItems.filter(
+        (item) =>
+          !(item.id === id && item.color === color && item.device === device),
+      ),
     );
   };
 
@@ -66,20 +74,20 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   };
 
-  const increaseQuantity = (id, color) => {
+  const increaseQuantity = (id, color, device) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id && item.color === color
+        item.id === id && item.color === color && item.device === device
           ? { ...item, quantity: item.quantity + 1 }
           : item,
       ),
     );
   };
 
-  const decreaseQuantity = (id, color) => {
+  const decreaseQuantity = (id, color, device) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id && item.color === color
+        item.id === id && item.color === color && item.device === device
           ? {
               ...item,
               quantity: item.quantity > 1 ? item.quantity - 1 : 1,

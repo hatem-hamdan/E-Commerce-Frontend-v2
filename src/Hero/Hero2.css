@@ -42,6 +42,7 @@
   position: relative;
 
   z-index: 5;
+  transform: translate(-31px, 30px);
 
   display: flex;
   justify-content: center;
@@ -49,7 +50,7 @@
 }
 
 .product-image {
-  width: min(420px, 90vw);
+  width: 360px !important;
 
   height: auto;
 

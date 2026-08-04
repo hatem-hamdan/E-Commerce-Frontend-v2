@@ -11,7 +11,7 @@ import { Routes, Route } from "react-router";
 import { CartProvider } from "./Compontes/CartContext";
 import { WhatsAppButton } from "./icons/FaWhatsap";
 import Footer from "./Footer/Footer";
-import Hero from "./Hero/Hero";
+// import Hero from "./Hero/Hero";
 import Hero2 from "./Hero/Hero2";
 
 import MainProdect from "./Pages/MainProdect";

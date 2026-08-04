@@ -5,7 +5,6 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 
 import "./Header.css";
 
-import Banner from "../Banner/Banner";
 
 import { Login } from "../Compontes/Login";
 import { Register } from "../Compontes/Register";
@@ -50,17 +49,14 @@ export function Header() {
       {/*========================
               TOP BAR
       ========================*/}
-
       <div className="top-bar">
         <div className="container">
           🚚 شحن سريع لجميع مناطق المملكة العربية السعودية
         </div>
       </div>
-
       {/*========================
               HEADER
       ========================*/}
-
       <header className="header">
         <div className="container navbar">
           {/* Logo */}
@@ -130,12 +126,9 @@ export function Header() {
         </div>
       </header>
 
-      <Banner />
-
       {/*========================
               LOGIN
       ========================*/}
-
       {showLogin && (
         <Login
           setUser={setUser}
@@ -147,11 +140,9 @@ export function Header() {
           }}
         />
       )}
-
       {/*========================
               REGISTER
       ========================*/}
-
       {showRegister && (
         <Register
           onClose={() => setShowRegister(false)}
