@@ -225,8 +225,11 @@ const MainProdect = () => {
                 إضافة إلى السلة
               </button>
 
-              <button className="btn-secondary" onClick={handleBuyNow}>
-                اشتري الآن
+              <button
+                className="btn-secondary"
+                onClick={() => navigate("/checkout")}
+              >
+                اذهب إلى السلة
               </button>
             </div>
 
