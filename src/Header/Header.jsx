@@ -63,11 +63,6 @@ export function Header() {
             {showMenu ? <FaTimes /> : <FaBars />}
           </button>
 
-          <Link to="/" className="logo">
-            <br />
-            <h2>NexuvoSaudi</h2>
-          </Link>
-
           {/* Navigation */}
 
           <nav className={`nav-links ${showMenu ? "open" : ""}`}>
