@@ -17,22 +17,18 @@ export function Register({ onClose, onSwitchToLogin }) {
     };
 
     try {
-      const response = await fetch(
-        "https://fafafaf-gydf.onrender.com/api/MyStore/Users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(registerData),
+      const response = await fetch("https://localhost:7078/api/MyStore/Users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(registerData),
+      });
 
       const result = await response.json();
 
       if (response.ok) {
-        alert("تم إنشاء الحساب بنجاح يا بطل! يمكنك تسجيل الدخول الآن.");
-
+        alert("تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.");
         onSwitchToLogin();
       } else {
         alert(
@@ -41,7 +37,7 @@ export function Register({ onClose, onSwitchToLogin }) {
       }
     } catch (error) {
       console.error("Error during register:", error);
-      alert("حدث خطأ في الاتصال بالسيرفر، تأكد أن الباك إيند يعمل!");
+      alert("حدث خطأ في الاتصال بالسيرفر،  !");
     }
   };
 
@@ -52,8 +48,11 @@ export function Register({ onClose, onSwitchToLogin }) {
       onClick={onClose}
     >
       <div
-        className="card shadow p-4"
-        style={{ width: "400px" }}
+        className="card shadow-lg border-0 p-4"
+        style={{
+          width: "430px",
+          borderRadius: "18px",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="d-flex justify-content-between align-items-center mb-4">
