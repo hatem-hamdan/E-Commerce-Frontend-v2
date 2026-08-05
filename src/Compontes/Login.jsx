@@ -34,21 +34,24 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
     };
 
     try {
-      const response = await fetch("https://localhost:7078/api/MyStore/Login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://jythg.onrender.com/api/MyStore/Login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(loginData),
         },
-        credentials: "include",
-        body: JSON.stringify(loginData),
-      });
+      );
 
       const result = await response.json();
 
       if (response.ok) {
         // 🟢 جلب بيانات المستخدم الحالي
         const currentUser = await axios.get(
-          "https://localhost:7078/api/MyStore/GetCurrentUser",
+          "https://jythg.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },

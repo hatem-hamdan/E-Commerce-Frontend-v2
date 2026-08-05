@@ -11,7 +11,7 @@ export default function MyOrders() {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7078/api/MyStore/GetMyOrders",
+          "https://jythg.onrender.com/MyStore/GetMyOrders",
           {
             method: "GET",
             credentials: "include",

@@ -56,7 +56,7 @@ const MainProdect = () => {
   const handleBuyNow = async () => {
     try {
       const response = await fetch(
-        "https://localhost:7078/api/MyStore/GetCurrentUser",
+        "https://jythg.onrender.com/MyStore/GetCurrentUser",
         {
           method: "GET",
           credentials: "include",

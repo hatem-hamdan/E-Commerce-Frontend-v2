@@ -32,13 +32,16 @@ export function Register({ onClose, onSwitchToLogin }) {
     };
 
     try {
-      const response = await fetch("https://localhost:7078/api/MyStore/Users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://jythg.onrender.com/api/MyStore/Users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(registerData),
         },
-        body: JSON.stringify(registerData),
-      });
+      );
 
       const result = await response.json();
 

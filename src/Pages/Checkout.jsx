@@ -68,7 +68,7 @@ export function Checkout() {
     try {
       // 2. إرسال الطلب مع تمرير الـ Authorization Header
       const response = await fetch(
-        "https://localhost:7078/api/MyStore/CreateOrder",
+        "https://jythg.onrender.com/api/MyStore/CreateOrder",
         {
           method: "POST",
           headers: {
