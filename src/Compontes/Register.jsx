@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-//  onSwitchToLogin هنا في الـ Props فوق 🎯
+// onSwitchToLogin هنا في الـ Props فوق 🎯
 export function Register({ onClose, onSwitchToLogin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [alertInfo, setAlertInfo] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
+
+  useEffect(() => {
+    if (alertInfo.show) {
+      const timer = setTimeout(() => {
+        setAlertInfo((prev) => ({ ...prev, show: false }));
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [alertInfo.show]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 1. تجميع البيانات من الـ State
     const registerData = {
       Username: name,
       Email: email,
@@ -28,16 +43,30 @@ export function Register({ onClose, onSwitchToLogin }) {
       const result = await response.json();
 
       if (response.ok) {
-        alert("تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.");
-        onSwitchToLogin();
+        setAlertInfo({
+          show: true,
+          message: "تم إنشاء حسابك بنجاح",
+          type: "success",
+        });
+
+        setTimeout(() => {
+          onSwitchToLogin();
+        }, 1000);
       } else {
-        alert(
-          "فشل إنشاء الحساب: " + (result.message || "تأكد من البيانات المدخلة"),
-        );
+        setAlertInfo({
+          show: true,
+          message: result.message || "تأكد من البيانات المدخلة",
+          type: "danger",
+        });
       }
     } catch (error) {
       console.error("Error during register:", error);
-      alert("حدث خطأ في الاتصال بالسيرفر،  !");
+
+      setAlertInfo({
+        show: true,
+        message: "حدث خطأ في الاتصال بالسيرفر",
+        type: "danger",
+      });
     }
   };
 
@@ -48,21 +77,36 @@ export function Register({ onClose, onSwitchToLogin }) {
       onClick={onClose}
     >
       <div
-        className="card shadow-lg border-0 p-4"
+        className="card shadow-lg border-0 p-4 position-relative"
         style={{
           width: "430px",
           borderRadius: "18px",
         }}
         onClick={(e) => e.stopPropagation()}
       >
+        {alertInfo.show && (
+          <div
+            className={`alert alert-${alertInfo.type} text-center shadow-sm position-absolute top-0 start-50 translate-middle-x w-100`}
+            style={{
+              zIndex: 1100,
+              borderRadius: "18px 18px 0 0",
+            }}
+          >
+            {alertInfo.type === "success" ? "✅ " : "❌ "}
+            {alertInfo.message}
+          </div>
+        )}
+
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h4 className="m-0 fw-bold">إنشاء حساب جديد</h4>
+
           <button className="btn-close" onClick={onClose}></button>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label">الاسم الكامل</label>
+
             <input
               type="text"
               className="form-control"
@@ -74,6 +118,7 @@ export function Register({ onClose, onSwitchToLogin }) {
 
           <div className="mb-3">
             <label className="form-label">البريد الإلكتروني</label>
+
             <input
               type="email"
               className="form-control"
@@ -85,6 +130,7 @@ export function Register({ onClose, onSwitchToLogin }) {
 
           <div className="mb-4">
             <label className="form-label">كلمة المرور</label>
+
             <input
               type="password"
               className="form-control"

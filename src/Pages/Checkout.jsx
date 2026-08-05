@@ -32,6 +32,8 @@ export function Checkout() {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
 
+  const shippingCost = 15;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -355,12 +357,13 @@ export function Checkout() {
 
               <div className="summary-row">
                 <span>الشحن</span>
-                <span className="free">مجاني</span>
+
+                <span>{shippingCost} ر.س</span>
               </div>
 
               <div className="summary-row">
                 <span>المجموع</span>
-                <strong>{cartTotal} ر.س</strong>
+                <strong>{cartTotal + shippingCost} ر.س</strong>{" "}
               </div>
             </div>
           </div>

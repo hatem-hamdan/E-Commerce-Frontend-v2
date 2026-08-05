@@ -90,30 +90,33 @@ export function Header() {
               <span className="badge">{cartCount}</span>
             </Link>
 
-            <button
-              className="login-btn"
-              onClick={() => {
-                if (user) {
-                  setShowAccountMenu(!showAccountMenu);
-                } else {
-                  setShowLogin(true);
-                }
-              }}
-            >
-              <FaUser className="user-icon" />
+            <div className="position-relative">
+              <button
+                className="login-btn"
+                onClick={() => {
+                  if (user) {
+                    setShowAccountMenu(!showAccountMenu);
+                  } else {
+                    setShowLogin(true);
+                  }
+                }}
+              >
+                <FaUser className="user-icon" />
 
-              <span className="user-name">
-                {user ? user.firstName || "حسابي" : "تسجيل الدخول"}
-              </span>
-            </button>
+                <span className="user-name">
+                  {user ? user.firstName || "حسابي" : "تسجيل الدخول"}
+                </span>
+              </button>
+
+              {showAccountMenu && (
+                <AccountMenu
+                  user={user}
+                  setUser={setUser}
+                  onClose={() => setShowAccountMenu(false)}
+                />
+              )}
+            </div>
           </div>
-
-          {showAccountMenu && (
-            <AccountMenu
-              setUser={setUser}
-              onClose={() => setShowAccountMenu(false)}
-            />
-          )}
         </div>
       </header>
 

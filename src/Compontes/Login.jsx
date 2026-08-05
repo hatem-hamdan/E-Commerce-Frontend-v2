@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 import ForgotPassword from "./ForgotPassword";
 import axios from "axios";
 
-export function Login({
-  onClose,
-  onSwitchToRegister,
-  setUser,
-  setShowAccountMenu,
-}) {
+export function Login({ onClose, onSwitchToRegister, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForget, setShowForget] = useState(false);
@@ -74,7 +69,6 @@ export function Login({
           if (onClose) onClose();
 
           // 🟢 فتح كارد الحساب
-          setShowAccountMenu(true);
         }, 1000);
       } else {
         // 🔴 خطأ تسجيل الدخول

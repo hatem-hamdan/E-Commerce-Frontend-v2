@@ -666,3 +666,18 @@
   text-align: center;
   font-weight: bold;
 }
+
+.remove-item-btn {
+  background: none;
+  border: none;
+  color: #ff5b5b;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+}
+
+.remove-item-btn:hover {
+  color: #ff2d2d;
+  text-decoration: underline;
+}
