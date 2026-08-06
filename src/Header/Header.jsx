@@ -28,7 +28,7 @@ export function Header() {
     const getCurrentUser = async () => {
       try {
         const response = await axios.get(
-          "https://jythg.onrender.com/MyStore/GetCurrentUser",
+          "https://jythg.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },
