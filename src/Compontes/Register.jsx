@@ -35,6 +35,8 @@ export function Register({ onClose, onSwitchToLogin }) {
     try {
       setLoading(true);
 
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
       const response = await fetch(
         "https://jythg.onrender.com/api/MyStore/Users",
         {
