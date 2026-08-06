@@ -4,6 +4,8 @@ import { Header } from "../Header/Header";
 import { useCart } from "../Compontes/CartContext"; // استيراد الكونتيكست
 import { Login } from "../Compontes/Login";
 import "./Checkout.css";
+
+import { Register } from "../Compontes/Register";
 export function Checkout() {
   const {
     cartItems,
@@ -13,6 +15,7 @@ export function Checkout() {
     cartTotal,
     clearCart,
   } = useCart();
+  const [showRegister, setShowRegister] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -139,7 +142,14 @@ export function Checkout() {
       <>
         <Header />
         <div className="container my-5 py-5 text-center d-flex flex-column align-items-center">
-          <Login onClose={() => setShowLogin(false)} />
+          <Login
+            onClose={() => setShowLogin(false)}
+            onSwitchToRegister={() => {
+              setShowLogin(false);
+              setShowRegister(true);
+            }}
+          />
+
           <button
             className="btn btn-dark mt-4"
             onClick={() => setShowLogin(false)}
@@ -151,6 +161,22 @@ export function Checkout() {
     );
   }
 
+  if (showRegister) {
+    return (
+      <>
+        <Header />
+        <div className="container my-5 py-5 text-center d-flex flex-column align-items-center">
+          <Register
+            onClose={() => setShowRegister(false)}
+            onSwitchToLogin={() => {
+              setShowRegister(false);
+              setShowLogin(true);
+            }}
+          />
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div className="checkout-page position-relative">
