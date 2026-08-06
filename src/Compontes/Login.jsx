@@ -33,6 +33,16 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
       password: password,
     };
 
+    console.log({
+      email,
+      password,
+    });
+
+    alert(
+      `Email: [${email}]
+Password: [${password}]`,
+    );
+
     try {
       const response = await fetch(
         "https://jythg.onrender.com/api/MyStore/Login",
