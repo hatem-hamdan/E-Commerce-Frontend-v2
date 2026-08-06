@@ -152,7 +152,7 @@ export default function MyOrders() {
               {order.items.map((item, index) => (
                 <div className="product-row" key={index}>
                   <img src="t3.png" alt={item.productName} />
-
+                  console.log(item);
                   <div className="product-info">
                     <h3>{item.productName}</h3>
 
@@ -161,7 +161,6 @@ export default function MyOrders() {
                     <p>اللون: {item.color}</p>
                     <p>نوع الجهاز: {item.deviceType}</p>
                   </div>
-
                   <div className="product-price">
                     <span>{item.itemPrice} ر.س</span>
                   </div>
