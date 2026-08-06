@@ -82,12 +82,13 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
         });
       }
     } catch (error) {
-      console.error("حدث خطأ أثناء الاتصال بالسيرفر:", error);
+      console.error(error);
 
-      // 🔴 السيرفر طافي
+      alert(error.message);
+
       setAlertInfo({
         show: true,
-        message: "السيرفر طافي أو غير قادر على الاتصال! ❌",
+        message: error.message,
         type: "danger",
       });
     }
