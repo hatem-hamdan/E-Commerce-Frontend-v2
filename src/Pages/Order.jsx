@@ -172,7 +172,7 @@ export default function MyOrders() {
               <div>
                 <span>الإجمالي</span>
 
-                <h2>{order.orderTotalPrice} ر.س</h2>
+                <h2>{order.orderTotalPrice + 15} ر.س</h2>
               </div>
             </div>
           </div>
