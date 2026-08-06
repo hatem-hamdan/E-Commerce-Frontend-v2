@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { locations } from "../Compontes/locations"; // استيراد ملف المناطق
-import { Header } from "../Header/Header";
+// import { Header } from "../Header/Header";
 import { useCart } from "../Compontes/CartContext"; // استيراد الكونتيكست
 import { Login } from "../Compontes/Login";
 import "./Checkout.css";
@@ -139,7 +139,6 @@ export function Checkout() {
   if (showLogin) {
     return (
       <>
-        <Header />
         <div className="container my-5 py-5 text-center d-flex flex-column align-items-center">
           <Login
             onClose={() => setShowLogin(false)}
@@ -163,7 +162,6 @@ export function Checkout() {
   if (showRegister) {
     return (
       <>
-        <Header />
         <div className="container my-5 py-5 text-center d-flex flex-column align-items-center">
           <Register
             onClose={() => setShowRegister(false)}
