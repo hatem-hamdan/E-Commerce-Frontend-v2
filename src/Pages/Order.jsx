@@ -152,7 +152,7 @@ export default function MyOrders() {
               {order.items.map((item, index) => (
                 <div className="product-row" key={index}>
                   <img src="t3.png" alt={item.productName} />
-                  console.log(item);
+                  {console.log(item)};
                   <div className="product-info">
                     <h3>{item.productName}</h3>
 
