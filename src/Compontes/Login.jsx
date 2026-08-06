@@ -58,14 +58,22 @@ Password: [${password}]`,
 
       const result = await response.json();
 
+      alert("Login Response: " + response.status);
+
       if (response.ok) {
-        // 🟢 جلب بيانات المستخدم الحالي
+        alert("قبل GetCurrentUser");
+
         const currentUser = await axios.get(
           "https://jythg.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },
         );
+
+        alert("بعد GetCurrentUser");
+
+        // 🟢 تحديث user داخل Header
+        setUser(currentUser.data);
 
         // 🟢 تحديث user داخل Header
         setUser(currentUser.data);
