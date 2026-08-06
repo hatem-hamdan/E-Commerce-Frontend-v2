@@ -96,7 +96,6 @@ export function Checkout() {
         if (cartItems.length === 0) {
           return (
             <>
-              <Header />
               <div className="container text-center my-5">
                 <h3>🛒 السلة فارغة</h3>
               </div>
