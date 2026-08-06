@@ -22,6 +22,9 @@ function Hero() {
             </div>
           </div>
 
+
+
+
           {/* Content */}
           <div className="hero-content">
             <div className="hero-badge">🔥 الأكثر مبيعًا</div>

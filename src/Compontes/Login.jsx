@@ -161,7 +161,7 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
             }}
             onClick={onSwitchToRegister}
           >
-            أنشئ حساباً الآن
+            انشاء حساب
           </span>
         </p>
 
