@@ -53,12 +53,25 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
       alert(result.token);
 
       if (response.ok) {
-        const currentUser = await axios.get(
+        try{
+
+
+ const currentUser = await axios.get(
           "https://jythg.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },
         );
+
+  alert("GetCurrentUser نجح");
+} catch (err) {
+  alert("GetCurrentUser فشل");
+  console.log(err);
+}
+
+
+        }
+       
 
         setUser(currentUser.data);
 
