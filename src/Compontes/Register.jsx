@@ -123,7 +123,7 @@ export function Register({ onClose, onSwitchToLogin }) {
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label">الاسم الكامل</label>
+              <label className="form-label">الاسم </label>
 
               <input
                 type="text"

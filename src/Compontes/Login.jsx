@@ -50,6 +50,7 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
       );
 
       const result = await response.json();
+      alert(result.token);
 
       if (response.ok) {
         const currentUser = await axios.get(
