@@ -4,6 +4,7 @@ import { locations } from "../Compontes/locations"; // استيراد ملف ا�
 import { useCart } from "../Compontes/CartContext"; // استيراد الكونتيكست
 import { Login } from "../Compontes/Login";
 import "./Checkout.css";
+import { LoadingOverlay } from "../Compontes/LoadingOverlay";
 
 import { Register } from "../Compontes/Register";
 export function Checkout() {
@@ -24,6 +25,7 @@ export function Checkout() {
   });
 
   const [showLogin, setShowLogin] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // 👈 1️⃣ حقيبة التنبيه الذكية للشيك أوت
   const [alertInfo, setAlertInfo] = useState({
@@ -70,6 +72,8 @@ export function Checkout() {
     console.log(finalOrder);
     try {
       // 2. إرسال الطلب مع تمرير الـ Authorization Header
+
+      setLoading(true);
       const response = await fetch(
         "https://jythg.onrender.com/api/MyStore/CreateOrder",
         {
@@ -133,6 +137,8 @@ export function Checkout() {
         message: "السيرفر لا يستجيب حالياً. ❌",
         type: "danger",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -176,6 +182,8 @@ export function Checkout() {
   }
   return (
     <>
+      {loading && <LoadingOverlay />}
+
       <div className="checkout-page position-relative">
         {/* Alert */}
 
@@ -315,8 +323,12 @@ export function Checkout() {
                   </label>
                 </div>
 
-                <button type="submit" className="checkout-btn">
-                  تأكيد الطلب
+                <button
+                  type="submit"
+                  className="checkout-btn"
+                  disabled={loading}
+                >
+                  {loading ? "جاري إرسال الطلب..." : "تأكيد الطلب"}
                 </button>
               </form>
             </div>
