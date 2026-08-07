@@ -33,16 +33,6 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
       password: password,
     };
 
-    console.log({
-      email,
-      password,
-    });
-
-    alert(
-      `Email: [${email}]
-Password: [${password}]`,
-    );
-
     try {
       const response = await fetch(
         "https://jythg.onrender.com/api/MyStore/Login",
@@ -58,19 +48,13 @@ Password: [${password}]`,
 
       const result = await response.json();
 
-      alert("Login Response: " + response.status);
-
       if (response.ok) {
-        alert("قبل GetCurrentUser");
-
         const currentUser = await axios.get(
           "https://jythg.onrender.com/api/MyStore/GetCurrentUser",
           {
             withCredentials: true,
           },
         );
-
-        alert("بعد GetCurrentUser");
 
         // 🟢 تحديث user داخل Header
         setUser(currentUser.data);
@@ -101,8 +85,6 @@ Password: [${password}]`,
       }
     } catch (error) {
       console.error(error);
-
-      alert(error.message);
 
       setAlertInfo({
         show: true,
