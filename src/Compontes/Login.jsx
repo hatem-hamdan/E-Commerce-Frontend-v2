@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import ForgotPassword from "./ForgotPassword";
 import axios from "axios";
+import { LoadingOverlay } from "./LoadingOverlay";
 
 export function Login({ onClose, onSwitchToRegister, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForget, setShowForget] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   // 1️⃣ حقيبة التنبيهة
   const [alertInfo, setAlertInfo] = useState({
     show: false,
@@ -34,6 +35,8 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
     };
 
     try {
+      setLoading(true);
+
       const response = await fetch(
         "https://jythg.onrender.com/api/MyStore/Login",
         {
@@ -56,13 +59,8 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
           },
         );
 
-        // 🟢 تحديث user داخل Header
         setUser(currentUser.data);
 
-        // 🟢 تحديث user داخل Header
-        setUser(currentUser.data);
-
-        // 🟢 تنبيه النجاح
         setAlertInfo({
           show: true,
           message: "تم تسجيل الدخول بنجاح! 🔑",
@@ -70,13 +68,9 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
         });
 
         setTimeout(() => {
-          // 🟢 إغلاق اللوقين
           if (onClose) onClose();
-
-          // 🟢 فتح كارد الحساب
         }, 1000);
       } else {
-        // 🔴 خطأ تسجيل الدخول
         setAlertInfo({
           show: true,
           message: result.message || "خطأ في تسجيل الدخول ❌",
@@ -91,96 +85,111 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
         message: error.message,
         type: "danger",
       });
+    } finally {
+      setLoading(false);
     }
   };
-
   return (
-    <div
-      className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 1050 }}
-      onClick={onClose}
-    >
+    <>
+      {loading && <LoadingOverlay />}
       <div
-        className="card shadow p-4 position-relative"
-        style={{ width: "400px" }}
-        onClick={(e) => e.stopPropagation()}
+        className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 1050 }}
+        onClick={() => {
+          if (!loading) onClose();
+        }}
       >
-        {/* التنبيه */}
-        {alertInfo.show && (
-          <div
-            className={`alert alert-${alertInfo.type} text-center shadow-sm position-absolute top-0 start-50 translate-middle-x w-100`}
-            style={{ zIndex: 1100, borderRadius: "0 0 8px 8px" }}
-          >
-            {alertInfo.type === "success" ? "✅ " : "❌ "}
-            {alertInfo.message}
+        <div
+          className="card shadow p-4 position-relative"
+          style={{ width: "400px" }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* التنبيه */}
+          {alertInfo.show && (
+            <div
+              className={`alert alert-${alertInfo.type} text-center shadow-sm position-absolute top-0 start-50 translate-middle-x w-100`}
+              style={{ zIndex: 1100, borderRadius: "0 0 8px 8px" }}
+            >
+              {alertInfo.type === "success" ? "✅ " : "❌ "}
+              {alertInfo.message}
+            </div>
+          )}
+
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h4 className="m-0 fw-bold">تسجيل الدخول</h4>
+
+            <button
+              className="btn-close"
+              onClick={onClose}
+              disabled={loading}
+            ></button>
           </div>
-        )}
 
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h4 className="m-0 fw-bold">تسجيل الدخول</h4>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3 text-end" style={{ direction: "rtl" }}>
+              <label className="form-label">البريد الإلكتروني</label>
 
-          <button className="btn-close" onClick={onClose}></button>
+              <input
+                type="email"
+                className="form-control"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="mb-4 text-end" style={{ direction: "rtl" }}>
+              <label className="form-label">كلمة المرور</label>
+
+              <input
+                type="password"
+                className="form-control"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn-dark w-100 py-2"
+              disabled={loading}
+            >
+              {loading ? "جاري تسجيل الدخول..." : "دخول"}
+            </button>
+          </form>
+
+          <p className="text-center mt-3 small text-muted">
+            ليس لديك حساب؟{" "}
+            <span
+              style={{
+                color: "blue",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+              onClick={() => {
+                if (!loading) onSwitchToRegister();
+              }}
+            >
+              انشاء حساب
+            </span>
+          </p>
+
+          <p className="text-center mt-3 small text-muted">
+            <span
+              style={{
+                color: "blue",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+              onClick={() => setShowForget(true)}
+            >
+              نسيت كلمة السر
+            </span>
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3 text-end" style={{ direction: "rtl" }}>
-            <label className="form-label">البريد الإلكتروني</label>
-
-            <input
-              type="email"
-              className="form-control"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-4 text-end" style={{ direction: "rtl" }}>
-            <label className="form-label">كلمة المرور</label>
-
-            <input
-              type="password"
-              className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-dark w-100 py-2">
-            دخول
-          </button>
-        </form>
-
-        <p className="text-center mt-3 small text-muted">
-          ليس لديك حساب؟{" "}
-          <span
-            style={{
-              color: "blue",
-              cursor: "pointer",
-              textDecoration: "underline",
-            }}
-            onClick={onSwitchToRegister}
-          >
-            انشاء حساب
-          </span>
-        </p>
-
-        <p className="text-center mt-3 small text-muted">
-          <span
-            style={{
-              color: "blue",
-              cursor: "pointer",
-              textDecoration: "underline",
-            }}
-            onClick={() => setShowForget(true)}
-          >
-            نسيت كلمة السر
-          </span>
-        </p>
+        {showForget && <ForgotPassword onClose={() => setShowForget(false)} />}
       </div>
-
-      {showForget && <ForgotPassword onClose={() => setShowForget(false)} />}
-    </div>
+    </>
   );
 }
