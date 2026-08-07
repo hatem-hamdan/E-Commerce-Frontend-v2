@@ -67,7 +67,7 @@ function Footer() {
             <p>
               <FaPhone />
 
-              <span>+966 56 123 4567</span>
+              <span>+966 56 295 6209</span>
             </p>
 
             <p>
