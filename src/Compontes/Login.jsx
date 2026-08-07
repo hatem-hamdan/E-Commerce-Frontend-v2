@@ -53,37 +53,31 @@ export function Login({ onClose, onSwitchToRegister, setUser }) {
       alert(result.token);
 
       if (response.ok) {
-        try{
+        try {
+          const currentUser = await axios.get(
+            "https://jythg.onrender.com/api/MyStore/GetCurrentUser",
+            {
+              withCredentials: true,
+            },
+          );
 
+          alert("GetCurrentUser نجح");
 
- const currentUser = await axios.get(
-          "https://jythg.onrender.com/api/MyStore/GetCurrentUser",
-          {
-            withCredentials: true,
-          },
-        );
+          setUser(currentUser.data);
 
-  alert("GetCurrentUser نجح");
-} catch (err) {
-  alert("GetCurrentUser فشل");
-  console.log(err);
-}
+          setAlertInfo({
+            show: true,
+            message: "تم تسجيل الدخول بنجاح! 🔑",
+            type: "success",
+          });
 
-
+          setTimeout(() => {
+            if (onClose) onClose();
+          }, 1000);
+        } catch (err) {
+          alert("GetCurrentUser فشل");
+          console.log(err);
         }
-       
-
-        setUser(currentUser.data);
-
-        setAlertInfo({
-          show: true,
-          message: "تم تسجيل الدخول بنجاح! 🔑",
-          type: "success",
-        });
-
-        setTimeout(() => {
-          if (onClose) onClose();
-        }, 1000);
       } else {
         setAlertInfo({
           show: true,
